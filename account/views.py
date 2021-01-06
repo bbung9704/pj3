@@ -1,9 +1,12 @@
+from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+
+from knox.views import LoginView as KnoxLoginView
 
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import login
 
 from .models import Profile
 
@@ -14,25 +17,18 @@ class SignUpView(APIView):
 
         user.save()
         profile.save()
-        
-        token = Token.objects.create(user=user)
-        
+                
         return Response({
             "username": user.username,
             "nickname": profile.nickname,
-            "token": token.key
         })
 
-class LoginView(APIView):
-    def post(self,request):
-        user = authenticate(username=request.data['username'], password=request.data['password'])
-        if user is not None:
-            profile = user.profile
-            token = Token.objects.get(user=user)
-            return Response({
-                "username": user.username,
-                "nickname": profile.nickname,
-                "token": token.key
-            })
-        else:
-            return Response('Wrong login info',status=401)
+class LoginView(KnoxLoginView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+        serializer = AuthTokenSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        login(request, user)
+        return super(LoginView, self).post(request, format=None)
