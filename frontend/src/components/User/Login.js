@@ -1,10 +1,36 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
 
 import { TextField, Button } from "@material-ui/core";
 import "./user.css";
 
+import { userContext } from "../../context/userContext.js";
+
+import { login } from "../../api/user.js";
+
 const Login = () => {
+  let history = useHistory();
+  const usernameRef = useRef(false);
+  const passwordRef = useRef(false);
+
+  const userstate = useContext(userContext);
+  const dispatch = userstate.dispatch;
+
+  const doLogin = () => {
+    login({
+      username: usernameRef.current.value,
+      password: passwordRef.current.value,
+    })
+      .then((res) => {
+        dispatch({
+          type: "LOGIN",
+          payload: res.data,
+        });
+        history.push("/");
+      })
+      .catch((err) => console.log(err.response.data, err.response.status));
+  };
+
   return (
     <>
       <div className="fullscreen-center">
@@ -16,6 +42,7 @@ const Login = () => {
               label="Username"
               color="secondary"
               size="small"
+              inputRef={usernameRef}
               fullWidth={true}
             />
             <TextField
@@ -24,6 +51,7 @@ const Login = () => {
               label="Password"
               color="secondary"
               size="small"
+              inputRef={passwordRef}
               fullWidth={true}
             />
             <div className="space-between" style={{ marginTop: "1.5rem" }}>
@@ -32,7 +60,12 @@ const Login = () => {
                   Register
                 </Button>
               </Link>
-              <Button variant="contained" color="secondary" size="small">
+              <Button
+                variant="contained"
+                color="secondary"
+                size="small"
+                onClick={doLogin}
+              >
                 Login
               </Button>
             </div>
