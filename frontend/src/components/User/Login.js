@@ -17,18 +17,14 @@ const Login = () => {
   const dispatch = userstate.dispatch;
 
   const doLogin = () => {
-    login({
-      username: usernameRef.current.value,
-      password: passwordRef.current.value,
-    })
-      .then((res) => {
-        dispatch({
-          type: "LOGIN",
-          payload: res.data,
-        });
-        history.push("/");
-      })
-      .catch((err) => console.log(err.response.data, err.response.status));
+    login(
+      {
+        username: usernameRef.current.value,
+        password: passwordRef.current.value,
+      },
+      dispatch,
+      history
+    );
   };
 
   return (

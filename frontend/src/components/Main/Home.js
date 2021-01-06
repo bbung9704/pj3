@@ -15,19 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     if (userstate.userstate.token) {
-      getUser(userstate.userstate.token)
-        .then((res) =>
-          dispatch({
-            type: "GET_USER",
-            payload: res.data,
-          })
-        )
-        .catch((err) => {
-          dispatch({
-            type: "RESET_USERSTATE",
-          });
-          history.push("/login");
-        });
+      getUser(userstate.userstate.token, dispatch, history);
     } else {
       history.push("/login");
     }
