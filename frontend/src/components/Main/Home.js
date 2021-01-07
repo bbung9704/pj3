@@ -20,7 +20,6 @@ const Home = () => {
       history.push("/login");
     }
   }, []);
-  console.log(userstate);
   return (
     <>
       <Header />

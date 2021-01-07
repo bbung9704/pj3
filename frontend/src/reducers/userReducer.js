@@ -16,7 +16,8 @@ function reducer(state, action) {
         image: action.payload.image,
       };
     case "RESET_USERSTATE":
-      console.log("RESET_USERSTATE");
+    case "LOGOUT":
+      console.log("RESET_USERSTATE", "LOGOUT");
       localStorage.removeItem("token");
       return {
         username: null,

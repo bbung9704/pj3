@@ -14,6 +14,19 @@ export const login = ({ username, password }, dispatch, history) => {
     .catch((err) => console.log(err.response.data, err.response.status));
 };
 
+export const logout = (token, dispatch, history) => {
+  const config = { headers: { Authorization: `Token ${token}` } };
+  axios
+    .post("api/auth/logout/", null, config)
+    .then((res) => {
+      dispatch({
+        type: "LOGOUT",
+      });
+      history.push("/login");
+    })
+    .catch((err) => console.log(err.response.data, err.response.status));
+};
+
 export const getUser = (token, dispatch, history) => {
   const config = { headers: { Authorization: `Token ${token}` } };
   axios
