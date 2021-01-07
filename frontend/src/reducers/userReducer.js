@@ -13,6 +13,7 @@ function reducer(state, action) {
         ...state,
         username: action.payload.username,
         nickname: action.payload.nickname,
+        image: action.payload.image,
       };
     case "RESET_USERSTATE":
       console.log("RESET_USERSTATE");
@@ -20,6 +21,7 @@ function reducer(state, action) {
       return {
         username: null,
         nickname: null,
+        image: null,
         token: null,
       };
     default:

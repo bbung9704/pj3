@@ -1,4 +1,7 @@
 .sticky-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   position: -webkit-sticky;
   position: sticky;
   top: 0;

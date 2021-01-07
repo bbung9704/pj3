@@ -13,7 +13,7 @@ from .models import Profile
 class SignUpView(APIView):
     def post(self, request):
         user = User.objects.create_user(username=request.data['username'], password=request.data['password'], email=request.data['email'])
-        profile = Profile(user=user, nickname=request.data['nickname'], image=None)
+        profile = Profile(user=user, nickname=request.data['nickname'])
 
         user.save()
         profile.save()
@@ -37,4 +37,4 @@ class UserInfoView(APIView):
     def get(self, request):
         user = request.user
         profile = user.profile
-        return Response({"username": user.username, "nickname": profile.nickname})
+        return Response({"username": user.username, "nickname": profile.nickname, "image": profile.image.url})

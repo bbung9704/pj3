@@ -17,6 +17,7 @@ const App = () => {
   const [userstate, dispatch] = useReducer(userReducer, {
     username: null,
     nickname: null,
+    image: null,
     token: localStorage.getItem("token"),
   });
 
