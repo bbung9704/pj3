@@ -31,3 +31,20 @@ export const getUser = (token, dispatch, history) => {
       history.push("/login");
     });
 };
+
+export const register = (
+  { username, password, email, nickname },
+  dispatch,
+  history
+) => {
+  const body = { username, password, email, nickname };
+  axios
+    .post("api/auth/signup/", body)
+    .then((res) => {
+      dispatch({
+        type: "REGISTER",
+      });
+      history.push("/login");
+    })
+    .catch((err) => console.error(err.response.data, err.response.status));
+};
