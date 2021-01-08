@@ -34,7 +34,7 @@ const Header = () => {
         <h1 id="logo" ref={logoRef}>
           Project#3
         </h1>
-        <div style={{ position: "absolute", right: "1rem" }}>
+        <div style={{ position: "absolute", right: "1.5rem" }}>
           <Avatar
             alt={userstate.userstate.username}
             src={userstate.userstate.image}
