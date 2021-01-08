@@ -1,8 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
-import { userContext } from "../../context/userContext.js";
+import "./main.css";
 
+import { userContext } from "../../context/userContext.js";
 import { getUser } from "../../api/user.js";
 
 import Header from "../Layout/Header.js";
@@ -23,7 +24,15 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div>Hello, {userstate.userstate.nickname}</div>
+      <div className="home-container">
+        <div className="home-feed">
+          <img
+            id="home-face"
+            src="./media/home/face2.png"
+            alt="home-face"
+          ></img>
+        </div>
+      </div>
     </>
   );
 };

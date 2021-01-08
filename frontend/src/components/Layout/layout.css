@@ -18,22 +18,27 @@
   top: 0;
   right: -100vw;
   background-color: var(--main-color);
+  -webkit-transition: 0.5s;
   transition: 0.5s;
+  z-index: 1;
 }
 
 .slide-in.active {
   right: 0;
+  -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
 #logo {
   color: var(--main-color);
   margin-left: 1rem;
+  -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
 #logo.active {
   color: white;
+  -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
@@ -48,6 +53,7 @@
   list-style: none;
   font-size: 3rem;
   color: white;
+  font-family: "Do Hyeon", sans-serif;
 }
 
 .slide-in li {
@@ -57,4 +63,20 @@
 
 .slide-in li:hover {
   color: pink;
+}
+
+.loading {
+  position: absolute;
+  height: 100%;
+  width: 100vw;
+  top: 0;
+  left: -100vw;
+  background-color: pink;
+  z-index: 3;
+}
+
+.loading.active {
+  left: 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }

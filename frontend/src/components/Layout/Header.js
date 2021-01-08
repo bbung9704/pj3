@@ -17,7 +17,11 @@ const Header = () => {
   const loadRef = useRef(false);
 
   const doLogout = () => {
-    logout(userstate.userstate.token, dispatch, history);
+    loadRef.current.classList.toggle("active");
+    setTimeout(
+      () => logout(userstate.userstate.token, dispatch, history),
+      1000
+    );
   };
 
   const slide = () => {
@@ -46,6 +50,7 @@ const Header = () => {
           <li onClick={doLogout}>Logout</li>
         </ul>
       </div>
+      <div className="loading" ref={loadRef}></div>
     </>
   );
 };
