@@ -5,6 +5,56 @@
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  background-color: #f50057;
+  background-color: transparent;
+  padding-top: 0.5rem;
   height: 3rem;
+  z-index: 2;
+}
+
+.slide-in {
+  position: absolute;
+  height: 100%;
+  width: 100vw;
+  top: 0;
+  right: -100vw;
+  background-color: var(--main-color);
+  transition: 0.5s;
+}
+
+.slide-in.active {
+  right: 0;
+  transition: 0.5s;
+}
+
+#logo {
+  color: var(--main-color);
+  margin-left: 1rem;
+  transition: 0.5s;
+}
+
+#logo.active {
+  color: white;
+  transition: 0.5s;
+}
+
+.slide-in ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 3rem;
+  color: white;
+}
+
+.slide-in li {
+  cursor: pointer;
+  margin-top: 2rem;
+}
+
+.slide-in li:hover {
+  color: pink;
 }
