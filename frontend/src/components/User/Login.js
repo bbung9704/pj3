@@ -12,19 +12,23 @@ const Login = () => {
   let history = useHistory();
   const usernameRef = useRef(false);
   const passwordRef = useRef(false);
+  const loadRef = useRef(false);
 
   const userstate = useContext(userContext);
   const dispatch = userstate.dispatch;
 
   const doLogin = () => {
-    login(
-      {
-        username: usernameRef.current.value,
-        password: passwordRef.current.value,
-      },
-      dispatch,
-      history
-    );
+    loadRef.current.classList.toggle("active");
+    setTimeout(() => {
+      login(
+        {
+          username: usernameRef.current.value,
+          password: passwordRef.current.value,
+        },
+        dispatch,
+        history
+      );
+    }, 500);
   };
 
   return (
@@ -68,6 +72,7 @@ const Login = () => {
           </form>
         </div>
       </div>
+      <div className="loading-login" ref={loadRef}></div>
     </>
   );
 };

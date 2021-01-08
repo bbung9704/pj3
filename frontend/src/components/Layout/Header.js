@@ -45,7 +45,7 @@ const Header = () => {
       </div>
       <div className="slide-in" ref={slideRef}>
         <ul>
-          <li>Profile</li>
+          <li>{userstate.userstate.nickname}</li>
           <li>My Account</li>
           <li onClick={doLogout}>Logout</li>
         </ul>
