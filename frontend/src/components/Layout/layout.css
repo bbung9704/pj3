@@ -31,6 +31,7 @@
 
 #logo {
   color: var(--main-color);
+  cursor: default;
   margin-left: 1rem;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -62,7 +63,7 @@
 }
 
 .slide-in li:hover {
-  color: pink;
+  color: var(--sub-color);
 }
 
 .loading {
@@ -71,7 +72,7 @@
   width: 100vw;
   top: 0;
   left: -100vw;
-  background-color: pink;
+  background-color: var(--sub-color);
   z-index: 3;
 }
 

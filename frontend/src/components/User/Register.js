@@ -85,7 +85,7 @@ const Register = () => {
               fullWidth={true}
             />
             <div className="space-between" style={{ marginTop: "1.5rem" }}>
-              <Link to="/" style={{ textDecorationLine: "none" }}>
+              <Link to="/login" style={{ textDecorationLine: "none" }}>
                 <Button variant="contained" color="secondary" size="small">
                   Back
                 </Button>

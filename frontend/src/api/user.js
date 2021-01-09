@@ -11,7 +11,13 @@ export const login = ({ username, password }, dispatch, history) => {
       });
       history.push("/");
     })
-    .catch((err) => console.log(err.response.data, err.response.status));
+    .catch((err) => {
+      console.log(err.response.data, err.response.status);
+      history.push("/");
+      setTimeout(() => {
+        console.error("잘못된 아이디 또는 비밀번호");
+      }, 300);
+    });
 };
 
 export const logout = (token, dispatch, history) => {

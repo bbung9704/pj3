@@ -7,6 +7,7 @@ import { userContext } from "../../context/userContext.js";
 import { getUser } from "../../api/user.js";
 
 import Header from "../Layout/Header.js";
+import Feed from "./Feed.js";
 
 const Home = () => {
   const userstate = useContext(userContext);
@@ -37,6 +38,12 @@ const Home = () => {
             src="./media/home/face2.png"
             alt="home-face"
           ></img>
+        </div>
+        <div className="home-main">
+          <div className="main-feed">
+            <Feed />
+          </div>
+          <div className="main-tag">Follows</div>
         </div>
       </div>
     </>

@@ -1,3 +1,4 @@
+/* Home.js */
 .home-container {
   position: relative;
   top: 0;
@@ -6,7 +7,6 @@
   flex-wrap: wrap;
   flex-direction: column;
   width: 100%;
-  color: var(--main-color);
 }
 
 .home-feed {
@@ -15,17 +15,42 @@
   align-items: center;
   width: 100%;
   height: 85vh;
-  background-color: white;
+  background-color: var(--sub-color);
 }
 
 #home-face {
   opacity: 0.8;
 }
 
-.test p {
+.home-main {
+  box-sizing: border-box;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.main-feed {
+  width: 80%;
+  min-width: 300px;
+  padding: 1rem;
+}
+
+.main-tag {
+  width: 20%;
+  min-width: 250px;
+  padding: 1rem;
+}
+
+@media screen and (max-width: 500px) {
+  .main-tag {
+    display: none;
+  }
+
+  .main-feed {
+    width: 100%;
+  }
 }
 
 .loading-home {
@@ -42,4 +67,45 @@
   right: -100vw;
   -webkit-transition: 0.5s;
   transition: 0.5s;
+}
+
+/* Feed.js */
+.feed {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--sub-color);
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.user-nick {
+  font-size: 90%;
+  font-weight: 400;
+  margin-left: 1rem;
+}
+
+.user-time {
+  font-size: 90%;
+  font-weight: 300;
+  color: gray;
+  margin-left: 0.3rem;
+}
+
+.feed p {
+  font-size: 90%;
+  font-weight: 300;
+}
+
+.image-container {
+  border-radius: 20px;
+  max-width: 100%;
 }
