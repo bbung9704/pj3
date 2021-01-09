@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from .models import *
 
 
@@ -16,3 +17,15 @@ class ProfileAdmin(admin.ModelAdmin):
         return obj.user.date_joined 
 
 admin.site.register(Profile, ProfileAdmin)
+
+class FollowAdmin(admin.ModelAdmin):
+    model = Follow
+    list_display = ('username', 'follow')
+
+    def username(self, obj):
+        return obj.user.username
+    
+    def follow(self, obj):
+        return obj.follow.username
+
+admin.site.register(Follow, FollowAdmin)

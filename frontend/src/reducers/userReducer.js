@@ -11,6 +11,7 @@ function reducer(state, action) {
       console.log("GET_USER");
       return {
         ...state,
+        id: action.payload.id,
         username: action.payload.username,
         nickname: action.payload.nickname,
         image: action.payload.image,
@@ -20,6 +21,7 @@ function reducer(state, action) {
       console.log("RESET_USERSTATE", "LOGOUT");
       localStorage.removeItem("token");
       return {
+        id: null,
         username: null,
         nickname: null,
         image: null,

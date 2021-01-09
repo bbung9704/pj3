@@ -9,6 +9,7 @@ from .models import Feed, FeedImage
 class FeedView(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
+    # Serializer로 validate check하게 바꾸기
     def post(self, request):
         user = request.user
         body = request.data['body']

@@ -8,7 +8,7 @@ from knox.views import LoginView as KnoxLoginView
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 
-from .models import Profile
+from .models import *
 
 class SignUpView(APIView):
     def post(self, request):
@@ -37,4 +37,20 @@ class UserInfoView(APIView):
     def get(self, request):
         user = request.user
         profile = user.profile
-        return Response({"username": user.username, "nickname": profile.nickname, "image": profile.image.url})
+        return Response({"id": user.id, "username": user.username, "nickname": profile.nickname, "image": profile.image.url})
+
+class FollowView(APIView):
+    permission_class = (permissions.IsAuthenticated,)
+
+    def post(self, request):
+        user = request.user
+        follow_id = request.data['id']
+        follow_user = User.objects.get(id=follow_id)
+
+        follow = Follow(user=user, follow=follow_user)
+        follow.save()
+
+        return Response({
+            "username": user.username,
+            "follow": follow_user.username
+        })

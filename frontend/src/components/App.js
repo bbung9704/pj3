@@ -15,6 +15,7 @@ import Home from "./Main/Home.js";
 
 const App = () => {
   const [userstate, dispatch] = useReducer(userReducer, {
+    id: null,
     username: null,
     nickname: null,
     image: null,
