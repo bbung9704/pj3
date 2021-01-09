@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .models import Feed, FeedImage
+from .serializers import FeedSerializer
 
 class FeedView(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -29,3 +30,17 @@ class FeedView(APIView):
             "body": feed.body,
             "created_at": feed.created_at
         })
+
+    def get(self, request):
+        user = request.user
+        follows = user.user_follow.all()
+        queryset = Feed.objects.none()
+
+        for follow in follows:
+            follow = follow.follow
+            queryset = queryset | follow.user_feed.all()
+
+        queryset = queryset.order_by('-created_at')
+        serializer = FeedSerializer(queryset, many=True)
+
+        return Response(serializer.data)
