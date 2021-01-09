@@ -13,6 +13,7 @@ class FeedSerializer(serializers.ModelSerializer):
     # User
     username = serializers.ReadOnlyField(source='user.username')
     nickname = serializers.ReadOnlyField(source='user.profile.nickname')
+    userimage = serializers.ReadOnlyField(source='user.profile.image.url')
     # FeedImage
     image = serializers.SerializerMethodField()
 
@@ -22,4 +23,4 @@ class FeedSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Feed
-        fields = ('id', 'body', 'created_at', 'username', 'nickname', 'image')
+        fields = ('id', 'body', 'created_at', 'username', 'nickname', 'userimage','image')

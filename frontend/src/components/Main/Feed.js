@@ -14,16 +14,16 @@ const Feed = (data) => {
       >
         <div className="user">
           <Avatar
-            alt={data.data.user.username}
-            src={data.data.user.image}
+            alt={data.data.username}
+            src={data.data.userimage}
             style={{ width: "35px", height: "35px" }}
           />
-          <span className="user-nick">{data.data.user.nickname}</span>
-          <span className="user-time">{`@${data.data.user.username}・${data.data.created_at}`}</span>
+          <span className="user-nick">{data.data.nickname}</span>
+          <span className="user-time">{`@${data.data.username}・${data.data.created_at}`}</span>
         </div>
         <p>{data.data.body}</p>
         <div className="image-container">
-          <img src={data.data.image} style={{ maxWidth: "100%" }}></img>
+          <img src={data.data.image[0]} style={{ maxWidth: "100%" }}></img>
         </div>
       </div>
     </>

@@ -15,7 +15,7 @@ const Login = () => {
   const loadRef = useRef(false);
 
   const userstate = useContext(userContext);
-  const dispatch = userstate.dispatch;
+  const userdispatch = userstate.userdispatch;
 
   const doLogin = () => {
     loadRef.current.classList.toggle("active");
@@ -25,7 +25,7 @@ const Login = () => {
           username: usernameRef.current.value,
           password: passwordRef.current.value,
         },
-        dispatch,
+        userdispatch,
         history
       );
     }, 500);

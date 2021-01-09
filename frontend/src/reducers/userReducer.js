@@ -1,4 +1,4 @@
-function reducer(state, action) {
+function userReducer(state, action) {
   switch (action.type) {
     case "LOGIN":
       console.log("LOGIN");
@@ -32,4 +32,4 @@ function reducer(state, action) {
   }
 }
 
-export default reducer;
+export default userReducer;

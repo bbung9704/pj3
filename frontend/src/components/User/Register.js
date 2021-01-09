@@ -10,7 +10,7 @@ import { register } from "../../api/user.js";
 const Register = () => {
   const history = useHistory();
   const userstate = useContext(userContext);
-  const dispatch = userstate.dispatch;
+  const userdispatch = userstate.userdispatch;
 
   const usernameRef = useRef(false);
   const passwordRef = useRef(false);
@@ -27,7 +27,7 @@ const Register = () => {
           email: emailRef.current.value,
           nickname: nicknameRef.current.value,
         },
-        dispatch,
+        userdispatch,
         history
       );
     } else {
