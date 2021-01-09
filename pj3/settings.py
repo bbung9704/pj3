@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'knox',
     'account',
     'frontend',
+    'feed',
 ]
 
 MIDDLEWARE = [
