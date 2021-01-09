@@ -17,6 +17,31 @@ const Home = () => {
 
   let history = useHistory();
 
+  const data = [
+    {
+      user: {
+        username: "yoon",
+        nickname: "김태윤",
+        image: "/media/default_image_2PRb5vU.png",
+      },
+      id: 1,
+      created_at: "34분 전",
+      body: "개가 이상한 모자쓰고 괜찮다고 하면서 커피 마시는 짤",
+      image: "https://media.giphy.com/media/QMHoU66sBXqqLqYvGO/giphy.gif",
+    },
+    {
+      user: {
+        username: "bbung97",
+        nickname: "붕어",
+        image: "/media/default_image.png",
+      },
+      id: 2,
+      created_at: "56분 전",
+      body: "대충 개가 귀 움직이는 짤",
+      image: "https://media.giphy.com/media/4Zo41lhzKt6iZ8xff9/giphy.gif",
+    },
+  ];
+
   useEffect(() => {
     setTimeout(() => {
       loadRef.current.classList.toggle("active");
@@ -40,8 +65,13 @@ const Home = () => {
           ></img>
         </div>
         <div className="home-main">
+          <div className="main-tag">Follows</div>
           <div className="main-feed">
-            <Feed />
+            <div className="feed">
+              Feeds
+              <Feed data={data[0]} />
+              <Feed data={data[1]} />
+            </div>
           </div>
           <div className="main-tag">Follows</div>
         </div>

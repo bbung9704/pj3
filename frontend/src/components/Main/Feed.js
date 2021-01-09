@@ -1,35 +1,29 @@
 // 작성자(닉네임, 아이디), 작성자 아바타, 작성일시, 내용, 사진(여러장 가능), 댓글, 좋아요
-import React, { useContext } from "react";
+import React from "react";
 
 import Avatar from "@material-ui/core/Avatar";
 
-import { userContext } from "../../context/userContext.js";
-
-const Feed = () => {
-  const userstate = useContext(userContext);
+const Feed = (data) => {
   return (
     <>
-      <div className="feed">
+      <div
+        style={{
+          marginTop: "0.5rem",
+          borderBottom: "1px solid var(--sub-color)",
+        }}
+      >
         <div className="user">
           <Avatar
-            alt={userstate.userstate.username}
-            src={userstate.userstate.image}
+            alt={data.data.user.username}
+            src={data.data.user.image}
             style={{ width: "35px", height: "35px" }}
           />
-          <span className="user-nick">{userstate.userstate.nickname}</span>
-          <span className="user-time">{`@${userstate.userstate.username}・34분 전`}</span>
+          <span className="user-nick">{data.data.user.nickname}</span>
+          <span className="user-time">{`@${data.data.user.username}・${data.data.created_at}`}</span>
         </div>
-        <p>
-          글 내용을 적는 부분입니다. 글 내용을 적는 부분입니다. 글 내용을 적는
-          부분입니다. 글 내용을 적는 부분입니다. 글 내용을 적는 부분입니다.글
-          내용을 적는 부분입니다. 글 내용을 적는 부분입니다. 글 내용을 적는
-          부분입니다. 글 내용을 적는 부분입니다. 글 내용을 적는 부분입니다.
-        </p>
+        <p>{data.data.body}</p>
         <div className="image-container">
-          <img
-            src="https://media.giphy.com/media/QMHoU66sBXqqLqYvGO/giphy.gif"
-            style={{ maxWidth: "100%" }}
-          ></img>
+          <img src={data.data.image} style={{ maxWidth: "100%" }}></img>
         </div>
       </div>
     </>
