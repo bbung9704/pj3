@@ -1,39 +1,74 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import "./comment.css";
 
-const Comment = (id) => {
+import { getComment, postComment, deleteComment } from "../../api/feed.js";
+import { timeForToday } from "../../api/time.js";
+
+const Comment = (data) => {
   const textRef = useRef(false);
+
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    getComment(data.token, data.id, setComments);
+  }, []);
 
   function resize(obj) {
     obj.style.height = "1px";
     obj.style.height = obj.scrollHeight + "px";
   }
 
+  const postCommentBtn = async () => {
+    await postComment(data.token, data.id, textRef.current.value);
+    await setTimeout(() => {
+      getComment(data.token, data.id, setComments);
+    }, 100);
+
+    textRef.current.value = "";
+    textRef.current.style.height = "1.8rem";
+  };
+
+  const deleteCommentBtn = async (id) => {
+    await deleteComment(data.token, id);
+    await setTimeout(() => {
+      getComment(data.token, data.id, setComments);
+    }, 100);
+  };
+
+  console.log("render");
   return (
     <>
       <div id="comment-item">
-        <li key="key">
-          <div className="follow-user">
-            <Avatar
-              alt="username"
-              src="/media/default_image.png"
-              style={{ width: "25px", height: "25px" }}
-            />
-            <span
-              className="user-nick"
-              style={{ marginLeft: "0.3rem", fontSize: "80%" }}
-            >
-              nickname
-            </span>
-            <span className="user-time" style={{ fontSize: "80%" }}>
-              @username・35분 전
-            </span>
-          </div>
-          <p>comments body.</p>
-        </li>
+        {comments.map((comment) => {
+          return (
+            <li key={comment.id}>
+              <div className="follow-user">
+                <Avatar
+                  alt={comment.username}
+                  src={comment.userimage}
+                  style={{ width: "25px", height: "25px" }}
+                />
+                <span className="comment-nick">{comment.nickname}</span>
+                <span className="comment-time">{`@${
+                  comment.username
+                }・${timeForToday(comment.created_at)}`}</span>
+                <div
+                  className="comment-delete"
+                  onClick={() => {
+                    deleteCommentBtn(comment.id);
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  삭제
+                </div>
+              </div>
+              <p>{comment.body}</p>
+            </li>
+          );
+        })}
         <div id="text-margin">
           <textarea
             id="comment-text"
@@ -43,7 +78,7 @@ const Comment = (id) => {
               resize(textRef.current);
             }}
           />
-          <Button variant="outlined" size="small">
+          <Button variant="outlined" size="small" onClick={postCommentBtn}>
             Comment
           </Button>
         </div>

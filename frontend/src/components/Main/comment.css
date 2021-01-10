@@ -40,3 +40,28 @@
   overflow-y: hidden;
   resize: none;
 }
+
+.comment-nick {
+  font-size: 80%;
+  font-weight: 400;
+  margin-left: 0.3rem;
+}
+
+.comment-time {
+  font-size: 80%;
+  font-weight: 300;
+  color: gray;
+  margin-left: 0.3rem;
+}
+
+.comment-delete {
+  cursor: "pointer";
+  font-size: 80%;
+  font-weight: 300;
+  color: gray;
+  margin-left: 0.3rem;
+}
+
+.comment-delete:hover {
+  color: darkgray;
+}

@@ -4,8 +4,8 @@ from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Feed, FeedImage
-from .serializers import FeedSerializer
+from .models import *
+from .serializers import *
 
 class FeedView(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -55,3 +55,38 @@ class FeedView(APIView):
             feed.delete()
             return Response()        
         return Response('Access Denied', status=400)
+
+class CommentView(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def post(self, request):
+        user = request.user
+        id = request.data['id']
+        feed = Feed.objects.get(id=id)
+        body = request.data['body']
+
+        comment = Comment(user=user, feed=feed, body=body)
+        comment.save()
+
+        serializer = CommentSerializer(comment)
+
+        return Response(serializer.data)
+
+    def get(self, request):
+        id = request.query_params.get('id')
+        feed = Feed.objects.get(id=id)
+        queryset = feed.feed_comment.all().order_by('created_at')
+        serializer = CommentSerializer(queryset, many=True)
+
+        return Response(serializer.data)
+
+    def delete(self, request):
+        user = request.user
+        id = request.data['id']
+        comment = Comment.objects.get(id=id)
+        if(user == comment.user):
+            comment.delete()
+            return Response('')
+        return Response('Access Denies', status=400)
+
+

@@ -50,6 +50,7 @@ const Feed = (data) => {
               <div id="more-item">
                 <li onClick={handleDeleteFeed}>Delete</li>
                 <li>Modify</li>
+                <li>{data.data.id}</li>
               </div>
             </ul>
           </div>
@@ -75,7 +76,7 @@ const Feed = (data) => {
               {"  Comment"}
             </Button>
             <ul id="comment-toggle" ref={commentToggleRef}>
-              <Comment id={data.data.id} />
+              <Comment id={data.data.id} token={data.token} />
             </ul>
           </div>
           <Button variant="outlined" size="small">

@@ -24,3 +24,12 @@ class FeedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feed
         fields = ('id', 'body', 'like', 'created_at', 'username', 'nickname', 'userimage','image')
+
+class CommentSerializer(serializers.ModelSerializer):
+    username = serializers.ReadOnlyField(source='user.username')
+    nickname = serializers.ReadOnlyField(source='user.profile.nickname')
+    userimage = serializers.ReadOnlyField(source='user.profile.image.url')
+
+    class Meta:
+        model = Comment
+        fields = ('id', 'username', 'nickname', 'userimage', 'body', 'created_at')
