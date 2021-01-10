@@ -2,6 +2,7 @@ import React, { useRef, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { TextField, Button } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 import "./user.css";
 
 import { userContext } from "../../context/userContext.js";
@@ -9,6 +10,17 @@ import { userContext } from "../../context/userContext.js";
 import { login } from "../../api/user.js";
 
 const Login = () => {
+  const CssTextField = withStyles({
+    root: {
+      "& label.Mui-focused": {
+        color: "var(--main-color)",
+      },
+      "& .MuiInput-underline:after": {
+        borderBottomColor: "var(--main-color)",
+      },
+    },
+  })(TextField);
+
   let history = useHistory();
   const usernameRef = useRef(false);
   const passwordRef = useRef(false);
@@ -37,7 +49,7 @@ const Login = () => {
         <div className="col-half-center">
           <h1 style={{ color: "var(--main-color)" }}>Project#3</h1>
           <form noValidate autoComplete="off">
-            <TextField
+            <CssTextField
               id="standard-basic"
               label="Username"
               color="secondary"
@@ -45,7 +57,7 @@ const Login = () => {
               inputRef={usernameRef}
               fullWidth={true}
             />
-            <TextField
+            <CssTextField
               id="standard-password-input"
               type="password"
               label="Password"

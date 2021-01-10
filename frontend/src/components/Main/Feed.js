@@ -50,7 +50,6 @@ const Feed = (data) => {
               <div id="more-item">
                 <li onClick={handleDeleteFeed}>Delete</li>
                 <li>Modify</li>
-                <li>{data.data.id}</li>
               </div>
             </ul>
           </div>

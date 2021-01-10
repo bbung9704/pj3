@@ -38,7 +38,6 @@ const Comment = (data) => {
     }, 100);
   };
 
-  console.log("render");
   return (
     <>
       <div id="comment-item">

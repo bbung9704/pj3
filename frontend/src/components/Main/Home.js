@@ -53,7 +53,12 @@ const Home = () => {
           <div className="main-tag">Alerts</div>
           <div className="main-feed">
             <div className="feed">
-              Feeds
+              <div className="feed-pencil">
+                Feed
+                <span id="pencil" className="material-icons">
+                  create
+                </span>
+              </div>
               {feedstate.feedstate.feeds.map((data) => {
                 return (
                   <Feed

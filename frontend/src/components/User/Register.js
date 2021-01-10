@@ -2,12 +2,24 @@ import React, { useRef, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { TextField, Button } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 import "./user.css";
 
 import { userContext } from "../../context/userContext.js";
 import { register } from "../../api/user.js";
 
 const Register = () => {
+  const CssTextField = withStyles({
+    root: {
+      "& label.Mui-focused": {
+        color: "var(--main-color)",
+      },
+      "& .MuiInput-underline:after": {
+        borderBottomColor: "var(--main-color)",
+      },
+    },
+  })(TextField);
+
   const history = useHistory();
   const userstate = useContext(userContext);
   const userdispatch = userstate.userdispatch;
@@ -39,9 +51,9 @@ const Register = () => {
     <>
       <div className="fullscreen-center">
         <div className="col-half-center">
-          <h1 style={{ color: "#f50057" }}>Register</h1>
+          <h1 style={{ color: "var(--main-color)" }}>Register</h1>
           <form noValidate autoComplete="off">
-            <TextField
+            <CssTextField
               id="standard-username"
               label="Username"
               color="secondary"
@@ -49,7 +61,7 @@ const Register = () => {
               inputRef={usernameRef}
               fullWidth={true}
             />
-            <TextField
+            <CssTextField
               id="standard-password-input"
               type="password"
               label="Password"
@@ -58,7 +70,7 @@ const Register = () => {
               inputRef={passwordRef}
               fullWidth={true}
             />
-            <TextField
+            <CssTextField
               id="standard-password2-input"
               type="password"
               label="Confirm Password"
@@ -67,7 +79,7 @@ const Register = () => {
               inputRef={password2Ref}
               fullWidth={true}
             />
-            <TextField
+            <CssTextField
               id="standard-email"
               type="email"
               label="Email"
@@ -76,7 +88,7 @@ const Register = () => {
               inputRef={emailRef}
               fullWidth={true}
             />
-            <TextField
+            <CssTextField
               id="standard-nickname"
               label="Nickname"
               color="secondary"

@@ -18,6 +18,22 @@
   background-color: var(--sub-color);
 }
 
+.feed-pencil {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#pencil {
+  border-radius: 50%;
+  font-size: 20px;
+  padding: 5px;
+}
+#pencil:hover {
+  background-color: rgb(230, 230, 230);
+}
+
 #home-face {
   opacity: 0.8;
 }
