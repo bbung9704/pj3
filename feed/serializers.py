@@ -23,4 +23,4 @@ class FeedSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Feed
-        fields = ('id', 'body', 'created_at', 'username', 'nickname', 'userimage','image')
+        fields = ('id', 'body', 'like', 'created_at', 'username', 'nickname', 'userimage','image')

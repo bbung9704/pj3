@@ -8,7 +8,7 @@
   padding-top: 0.5rem;
   width: 100vw;
   height: 3rem;
-  z-index: 2;
+  z-index: 3;
   border-radius: 0 0 5px 5px;
 }
 
@@ -16,7 +16,7 @@
   .sticky-top {
     background-color: var(--sub-color);
     padding-top: 0;
-    z-index: 2;
+    z-index: 3;
     -webkit-transition: 0.5s;
     transition: 0.5s;
   }
@@ -36,7 +36,7 @@
   background-color: var(--main-color);
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  z-index: 1;
+  z-index: 2;
 }
 
 .slide-in.active {

@@ -86,16 +86,11 @@ const Register = () => {
             />
             <div className="space-between" style={{ marginTop: "1.5rem" }}>
               <Link to="/login" style={{ textDecorationLine: "none" }}>
-                <Button variant="contained" color="secondary" size="small">
+                <Button variant="contained" size="small">
                   Back
                 </Button>
               </Link>
-              <Button
-                variant="contained"
-                color="secondary"
-                size="small"
-                onClick={doRegister}
-              >
+              <Button variant="contained" size="small" onClick={doRegister}>
                 Register
               </Button>
             </div>

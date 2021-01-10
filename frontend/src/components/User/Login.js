@@ -35,7 +35,7 @@ const Login = () => {
     <>
       <div className="fullscreen-center">
         <div className="col-half-center">
-          <h1 style={{ color: "#f50057" }}>Project#3</h1>
+          <h1 style={{ color: "var(--main-color)" }}>Project#3</h1>
           <form noValidate autoComplete="off">
             <TextField
               id="standard-basic"
@@ -56,16 +56,11 @@ const Login = () => {
             />
             <div className="space-between" style={{ marginTop: "1.5rem" }}>
               <Link to="/register" style={{ textDecorationLine: "none" }}>
-                <Button variant="contained" color="secondary" size="small">
+                <Button variant="contained" size="small">
                   Register
                 </Button>
               </Link>
-              <Button
-                variant="contained"
-                color="secondary"
-                size="small"
-                onClick={doLogin}
-              >
+              <Button variant="contained" size="small" onClick={doLogin}>
                 Login
               </Button>
             </div>

@@ -1,12 +1,14 @@
 // 작성자(닉네임, 아이디), 작성자 아바타, 작성일시, 내용, 사진(여러장 가능), 댓글, 좋아요
 import React, { useRef, useContext } from "react";
 
+import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import "./feed.css";
 
 import { feedContext } from "../../context/feedContext.js";
 import { timeForToday } from "../../api/time.js";
 import { deleteFeed, getMainFeed } from "../../api/feed.js";
+import Comment from "./Comment.js";
 
 const Feed = (data) => {
   const feedstate = useContext(feedContext);
@@ -14,6 +16,11 @@ const Feed = (data) => {
   const moreToggleRef = useRef(false);
   const moreToggle = () => {
     moreToggleRef.current.classList.toggle("active");
+  };
+
+  const commentToggleRef = useRef(false);
+  const commentToggle = () => {
+    commentToggleRef.current.classList.toggle("active");
   };
 
   const handleDeleteFeed = () => {
@@ -49,10 +56,34 @@ const Feed = (data) => {
         </div>
         <p>{data.data.body}</p>
         <div className="image-container">
-          <img
-            src={data.data.image[0]}
-            style={{ width: "100%", maxWidth: "100%" }}
-          ></img>
+          {data.data.image.map((img) => {
+            return (
+              <img
+                key={img}
+                src={img}
+                style={{ width: "100%", maxWidth: "100%" }}
+              ></img>
+            );
+          })}
+        </div>
+        <div className="bottom-container">
+          <div className="comment-container">
+            <Button variant="outlined" size="small" onClick={commentToggle}>
+              <span className="material-icons" id="bottom-icon">
+                comment
+              </span>{" "}
+              {"  Comment"}
+            </Button>
+            <ul id="comment-toggle" ref={commentToggleRef}>
+              <Comment id={data.data.id} />
+            </ul>
+          </div>
+          <Button variant="outlined" size="small">
+            <span className="material-icons" id="bottom-icon">
+              favorite
+            </span>{" "}
+            {data.data.like}
+          </Button>
         </div>
       </div>
     </>

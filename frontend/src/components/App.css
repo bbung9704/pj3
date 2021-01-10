@@ -10,8 +10,11 @@ body,
 }
 
 :root {
-  --main-color: #f50057;
-  --sub-color: pink;
+  /* --main-color: #f50057;
+  --sub-color: pink; */
+
+  --main-color: rgb(100, 100, 100);
+  --sub-color: rgb(180, 180, 180);
 }
 
 #app {
@@ -32,4 +35,14 @@ body,
 
 .material-icons {
   cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+li {
+  margin: 0;
+  padding: 0;
 }

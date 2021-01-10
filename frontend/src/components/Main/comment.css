@@ -1,0 +1,42 @@
+#comment-item {
+  box-sizing: border-box;
+  position: absolute;
+  top: 3px;
+  width: 115%;
+  background-color: white;
+  border: 1px solid rgba(150, 150, 150, 0.8);
+  border-radius: 5px;
+}
+
+#comment-item li {
+  border-radius: 5px;
+  box-sizing: border-box;
+  text-align: start;
+  width: 100%;
+}
+#comment-item li:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+#comment-item p {
+  margin-block: 0.5rem;
+  font-size: "80%";
+}
+
+#text-margin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+#comment-text {
+  box-sizing: border-box;
+  height: 1.8rem;
+  width: 80%;
+  border: 1px solid rgba(150, 150, 150, 0.8);
+  border-radius: 5px;
+  padding: 0.3rem;
+  overflow-y: hidden;
+  resize: none;
+}

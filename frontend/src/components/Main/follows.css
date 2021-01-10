@@ -9,6 +9,7 @@
   position: sticky;
   position: -webkit-sticky;
   top: 4.5rem;
+  background-color: white;
 }
 
 .follow-user {
@@ -37,5 +38,5 @@
 }
 
 .follow-container li:hover {
-  background-color: var(--sub-color);
+  background-color: rgb(230, 230, 230);
 }
