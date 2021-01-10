@@ -11,6 +11,7 @@ import { getMainFeed } from "../../api/feed.js";
 
 import Header from "../Layout/Header.js";
 import Feed from "./Feed.js";
+import Follows from "./Follows.js";
 
 const Home = () => {
   const userstate = useContext(userContext);
@@ -49,7 +50,7 @@ const Home = () => {
           ></img>
         </div>
         <div className="home-main">
-          <div className="main-tag">Follows</div>
+          <div className="main-tag">Alerts</div>
           <div className="main-feed">
             <div className="feed">
               Feeds
@@ -58,7 +59,11 @@ const Home = () => {
               })}
             </div>
           </div>
-          <div className="main-tag">Follows</div>
+          <div className="main-tag">
+            <div className="follows">
+              <Follows token={userstate.userstate.token} />
+            </div>
+          </div>
         </div>
       </div>
     </>

@@ -14,6 +14,7 @@ const Header = () => {
 
   const slideRef = useRef(false);
   const logoRef = useRef(false);
+  const barRef = useRef(false);
   const loadRef = useRef(false);
 
   const doLogout = () => {
@@ -25,16 +26,17 @@ const Header = () => {
   };
 
   const slide = () => {
+    barRef.current.classList.toggle("active");
     slideRef.current.classList.toggle("active");
     logoRef.current.classList.toggle("active");
   };
   return (
     <>
-      <div className="sticky-top">
+      <div className="sticky-top" ref={barRef}>
         <h1 id="logo" ref={logoRef}>
           Project#3
         </h1>
-        <div style={{ position: "absolute", right: "1.5rem" }}>
+        <div id="head-avatar" style={{ position: "absolute", right: "1.5rem" }}>
           <Avatar
             alt={userstate.userstate.username}
             src={userstate.userstate.image}

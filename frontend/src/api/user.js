@@ -67,3 +67,11 @@ export const register = (
     })
     .catch((err) => console.error(err.response.data, err.response.status));
 };
+
+export const follows = (token, setState) => {
+  const config = { headers: { Authorization: `Token ${token.token}` } };
+  axios
+    .get("api/auth/follow/", config)
+    .then((res) => setState(res.data))
+    .catch((err) => console.error(err));
+};

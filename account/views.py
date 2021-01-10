@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login
 
 from .models import *
+from .serializers import *
 
 class SignUpView(APIView):
     def post(self, request):
@@ -54,3 +55,12 @@ class FollowView(APIView):
             "username": user.username,
             "follow": follow_user.username
         })
+
+    def get(self, request):
+        user = request.user
+        queryset = user.user_follow.all()
+        
+        serializer = FollowSerializer(queryset, many=True)
+
+        return Response(serializer.data)
+

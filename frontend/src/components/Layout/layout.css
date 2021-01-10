@@ -9,8 +9,24 @@
   width: 100vw;
   height: 3rem;
   z-index: 2;
+  border-radius: 0 0 5px 5px;
 }
 
+@media screen and (max-width: 820px) {
+  .sticky-top {
+    background-color: var(--sub-color);
+    padding-top: 0;
+    z-index: 2;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+  }
+
+  .sticky-top.active {
+    background-color: var(--main-color);
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+  }
+}
 .slide-in {
   position: fixed;
   height: 100vh;
