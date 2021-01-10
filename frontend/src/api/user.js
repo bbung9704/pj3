@@ -30,7 +30,7 @@ export const logout = (token, dispatch, history) => {
       });
       history.push("/login");
     })
-    .catch((err) => console.log(err.response.data, err.response.status));
+    .catch((err) => console.error(err));
 };
 
 export const getUser = (token, dispatch, history) => {
@@ -65,7 +65,7 @@ export const register = (
       });
       history.push("/login");
     })
-    .catch((err) => console.error(err.response.data, err.response.status));
+    .catch((err) => console.error("signup error"));
 };
 
 export const follows = (token, setState) => {
@@ -73,5 +73,5 @@ export const follows = (token, setState) => {
   axios
     .get("api/auth/follow/", config)
     .then((res) => setState(res.data))
-    .catch((err) => console.error(err));
+    .catch((err) => console.error("follow error"));
 };

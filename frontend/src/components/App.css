@@ -29,3 +29,7 @@ body,
   background-color: gainsboro;
   border-radius: 10px;
 }
+
+.material-icons {
+  cursor: pointer;
+}

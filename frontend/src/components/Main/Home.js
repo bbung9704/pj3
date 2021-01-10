@@ -36,7 +36,6 @@ const Home = () => {
     }
   }, []);
 
-  console.log(userstate.userstate);
   return (
     <>
       <div className="loading-home" ref={loadRef}></div>
@@ -55,7 +54,13 @@ const Home = () => {
             <div className="feed">
               Feeds
               {feedstate.feedstate.feeds.map((data) => {
-                return <Feed key={data.id} data={data} />;
+                return (
+                  <Feed
+                    key={data.id}
+                    token={userstate.userstate.token}
+                    data={data}
+                  />
+                );
               })}
             </div>
           </div>

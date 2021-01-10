@@ -35,6 +35,7 @@ class FeedView(APIView):
         user = request.user
         follows = user.user_follow.all()
         queryset = Feed.objects.none()
+        queryset = queryset | user.user_feed.all()
 
         for follow in follows:
             follow = follow.follow
@@ -44,3 +45,13 @@ class FeedView(APIView):
         serializer = FeedSerializer(queryset, many=True)
 
         return Response(serializer.data)
+
+    def delete(self, request):
+        user = request.user
+        data = request.data['id']
+
+        feed = Feed.objects.get(id=data)
+        if(feed.user == user):
+            feed.delete()
+            return Response()        
+        return Response('Access Denied', status=400)

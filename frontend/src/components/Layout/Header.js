@@ -10,7 +10,7 @@ import { logout } from "../../api/user.js";
 const Header = () => {
   const history = useHistory();
   const userstate = useContext(userContext);
-  const dispatch = userstate.dispatch;
+  const userdispatch = userstate.userdispatch;
 
   const slideRef = useRef(false);
   const logoRef = useRef(false);
@@ -20,7 +20,7 @@ const Header = () => {
   const doLogout = () => {
     loadRef.current.classList.toggle("active");
     setTimeout(
-      () => logout(userstate.userstate.token, dispatch, history),
+      () => logout(userstate.userstate.token, userdispatch, history),
       1000
     );
   };

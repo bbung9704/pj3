@@ -1,0 +1,97 @@
+/* Feed.js */
+.feed {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--sub-color);
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+
+.feed-container {
+  margin-top: 0.5rem;
+  border-bottom: 1px solid var(--sub-color);
+}
+
+#feed-user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#feed-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-nick {
+  font-size: 90%;
+  font-weight: 400;
+  margin-left: 0.5rem;
+}
+
+.user-time {
+  font-size: 90%;
+  font-weight: 300;
+  color: gray;
+  margin-left: 0.3rem;
+}
+
+#icons {
+  border-radius: 50%;
+}
+#icons:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+}
+
+#more-toggle {
+  display: none;
+  position: sticky;
+  position: -webkit-sticky;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#more-item {
+  position: absolute;
+  top: 0;
+  left: -3rem;
+  background-color: white;
+  border: 1px solid rgba(200, 200, 200, 0.8);
+  border-radius: 3px;
+  font-size: 80%;
+}
+#more-item li {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+#more-item li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#more-toggle.active {
+  display: block;
+}
+
+.feed p {
+  font-size: 90%;
+  font-weight: 300;
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}

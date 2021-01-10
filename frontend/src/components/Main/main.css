@@ -27,7 +27,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
   margin-inline: auto;
 }
 
@@ -42,7 +42,7 @@
   box-sizing: border-box;
   width: 80%;
   min-width: 320px;
-  max-width: 700px;
+  max-width: 500px;
   padding-block: 1rem;
 }
 
@@ -71,82 +71,4 @@
   right: -100vw;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-}
-
-/* Feed.js */
-.feed {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--sub-color);
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
-}
-
-.user {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.user-nick {
-  font-size: 90%;
-  font-weight: 400;
-  margin-left: 0.5rem;
-}
-
-.user-time {
-  font-size: 90%;
-  font-weight: 300;
-  color: gray;
-  margin-left: 0.3rem;
-}
-
-.feed p {
-  font-size: 90%;
-  font-weight: 300;
-}
-
-.image-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
-}
-
-/* Follows.js */
-.follows {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--sub-color);
-  border-radius: 5px;
-  width: 100%;
-  position: sticky;
-  position: -webkit-sticky;
-  top: 70px;
-}
-
-.follow-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.follow-container ul {
-  list-style: none;
-  margin: 0;
-  padding: 0.5rem 0.5rem;
-}
-.follow-container li {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0.5rem 0.5rem;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.follow-container li:hover {
-  background-color: var(--sub-color);
 }

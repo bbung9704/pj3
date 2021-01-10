@@ -12,3 +12,14 @@ export const getMainFeed = (token, dispatch) => {
     })
     .catch((err) => console.error(err.response.data, err.response.status));
 };
+
+export const deleteFeed = (token, id, getMainFeed, feeddispatch) => {
+  const config = {
+    headers: { Authorization: `Token ${token}` },
+    data: { id: id },
+  };
+  axios
+    .delete("api/feed/", config)
+    .then(() => getMainFeed(token, feeddispatch))
+    .catch((err) => console.error(err.response.data));
+};
