@@ -48,7 +48,6 @@ const AlertFeed = (token) => {
               return (
                 <li
                   key={feed.id}
-                  onClick={() => checkAlert(feed.id, feed.checked)}
                   style={
                     feed.checked
                       ? {
@@ -76,7 +75,6 @@ const AlertFeed = (token) => {
               return (
                 <li
                   key={feed.id}
-                  onClick={() => checkAlert(feed.id, feed.checked)}
                   style={
                     feed.checked
                       ? { backgroundColor: "rgb(230, 230, 230)" }
@@ -101,7 +99,6 @@ const AlertFeed = (token) => {
               return (
                 <li
                   key={feed.id}
-                  onClick={() => checkAlert(feed.id, feed.checked)}
                   style={
                     feed.checked
                       ? { backgroundColor: "rgb(230, 230, 230)" }

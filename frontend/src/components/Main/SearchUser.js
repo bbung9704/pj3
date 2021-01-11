@@ -15,7 +15,10 @@ const SearchUser = (token) => {
   const feed_context = useContext(feedContext);
 
   const search = () => {
-    searchUser(token.token, searchRef.current.value, setResult);
+    const text = searchRef.current.value;
+    if (text[0] !== " " && text !== "" && text.length >= 2) {
+      searchUser(token.token, text, setResult);
+    }
   };
 
   const follow = async (id) => {
