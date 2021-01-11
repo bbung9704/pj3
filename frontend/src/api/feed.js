@@ -92,3 +92,16 @@ export const checkAlertFeed = (token, id) => {
     .then()
     .catch((err) => console.error(err.response.data));
 };
+
+export const deleteAlertFeed = (token, id) => {
+  const config = {
+    headers: { Authorization: `Token ${token}` },
+    data: { id: id },
+  };
+
+  console.log("DELETE_ALERTFEED");
+  axios
+    .delete("api/alertfeed/", config)
+    .then()
+    .catch((err) => console.error(err.response.data));
+};

@@ -10,9 +10,20 @@ class CommentInline(admin.TabularInline):
 class FeedAdmin(admin.ModelAdmin):
     model = Feed
     inlines = (FeedImageInline, CommentInline,)
-    list_display = ('username', 'created_at')
+    list_display = ('id', 'username', 'created_at')
 
     def username(self, obj):
         return obj.user.username
 
 admin.site.register(Feed, FeedAdmin)
+
+class AlertFeedAdmin(admin.ModelAdmin):
+    model = AlertFeed
+    list_display = ('username', 'sendername', 'content_type', 'created_at')
+
+    def username(self, obj):
+        return obj.user.username
+    def sendername(self, obj):
+        return obj.sender.username
+    
+admin.site.register(AlertFeed, AlertFeedAdmin)

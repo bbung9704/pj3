@@ -3,20 +3,20 @@ import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import "./follows.css";
 
-import { follows } from "../../api/user.js";
+import { getFollows } from "../../api/user.js";
 
 const Follows = (token) => {
   const [users, setFollow] = useState([]);
 
   useEffect(() => {
-    follows(token, setFollow);
+    getFollows(token, setFollow);
   }, []);
 
   return (
     <>
       <div className="follow-container">
         <ul>
-          <span style={{ padding: "0.5rem" }}>Follow</span>
+          <div id="follow-container-title">Follow</div>
           {users.map((follow) => {
             return (
               <li key={follow.id} className="follow-user">

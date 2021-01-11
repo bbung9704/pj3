@@ -13,6 +13,7 @@ import Header from "../Layout/Header.js";
 import Feed from "./Feed.js";
 import Follows from "./Follows.js";
 import AlertFeed from "./AlertFeed.js";
+import SearchUser from "./SearchUser.js";
 
 const Home = () => {
   const userstate = useContext(userContext);
@@ -76,7 +77,8 @@ const Home = () => {
           </div>
 
           <div className="main-tag">
-            <div className="follows">
+            <div className="sticky-side">
+              <SearchUser token={userstate.userstate.token} />
               <Follows token={userstate.userstate.token} />
             </div>
           </div>

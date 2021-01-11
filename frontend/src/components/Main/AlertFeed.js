@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import "./alertfeed.css";
 
-import { getAlertFeed, checkAlertFeed } from "../../api/feed.js";
+import {
+  getAlertFeed,
+  checkAlertFeed,
+  deleteAlertFeed,
+} from "../../api/feed.js";
 import { timeForToday } from "../../api/time.js";
 
 const AlertFeed = (token) => {
@@ -27,6 +31,13 @@ const AlertFeed = (token) => {
     }
   };
 
+  const deleteAlert = async (id) => {
+    await deleteAlertFeed(token.token, id);
+    await setTimeout(() => {
+      getAlertFeed(token.token, setAlertFeed);
+    }, 100);
+  };
+
   return (
     <>
       <ul className="alert-container">
@@ -49,7 +60,15 @@ const AlertFeed = (token) => {
                   <span id="alert-bold">{feed.nickname}</span>님이{" "}
                   <span id="alert-bold">{`'${cutStrings(feed.body)}'`}</span> 에
                   댓글을 남겼습니다.
-                  <div id="alert-time">{timeForToday(feed.created_at)}</div>
+                  <div id="alert-time">
+                    {timeForToday(feed.created_at)}
+                    <span
+                      id="alert-delete"
+                      onClick={() => deleteAlert(feed.id)}
+                    >
+                      삭제
+                    </span>
+                  </div>
                 </li>
               );
 
@@ -67,7 +86,39 @@ const AlertFeed = (token) => {
                   <span id="alert-bold">{feed.nickname}</span>님이{" "}
                   <span id="alert-bold">{`'${cutStrings(feed.body)}'`}</span> 를
                   좋아합니다.
-                  <div id="alert-time">{timeForToday(feed.created_at)}</div>
+                  <div id="alert-time">
+                    {timeForToday(feed.created_at)}
+                    <span
+                      id="alert-delete"
+                      onClick={() => deleteAlert(feed.id)}
+                    >
+                      삭제
+                    </span>
+                  </div>
+                </li>
+              );
+            case "follow":
+              return (
+                <li
+                  key={feed.id}
+                  onClick={() => checkAlert(feed.id, feed.checked)}
+                  style={
+                    feed.checked
+                      ? { backgroundColor: "rgb(230, 230, 230)" }
+                      : {}
+                  }
+                >
+                  <span id="alert-bold">{feed.nickname}</span>님이 회원님을
+                  팔로우 합니다.
+                  <div id="alert-time">
+                    {timeForToday(feed.created_at)}
+                    <span
+                      id="alert-delete"
+                      onClick={() => deleteAlert(feed.id)}
+                    >
+                      삭제
+                    </span>
+                  </div>
                 </li>
               );
             default:

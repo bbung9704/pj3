@@ -1,9 +1,6 @@
 from rest_framework import serializers
 from .models import *
 
-# username(user), nickname(profile)
-# id(feed), created_at(feed), body(feed), image(feedimage)
-
 class FeedImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = FeedImage
@@ -37,7 +34,8 @@ class CommentSerializer(serializers.ModelSerializer):
 class AlertFeedSerializer(serializers.ModelSerializer):
     nickname = serializers.ReadOnlyField(source='sender.profile.nickname')
     body = serializers.ReadOnlyField(source='feed.body')
+    feed_id = serializers.ReadOnlyField(source='feed.id')
 
     class Meta:
         model = AlertFeed
-        fields = ('id', 'nickname', 'body', 'content_type', 'created_at', 'checked')
+        fields = ('id', 'nickname', 'feed_id', 'body', 'content_type', 'created_at', 'checked')

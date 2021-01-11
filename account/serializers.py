@@ -9,3 +9,11 @@ class FollowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Follow
         fields = ('id', 'username', 'nickname', 'image')
+
+class ProfileSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField(source='user.id')
+    username = serializers.ReadOnlyField(source='user.username')
+
+    class Meta:
+        model = Profile
+        fields = ('id', 'username', 'nickname', 'image')

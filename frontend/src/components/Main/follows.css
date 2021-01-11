@@ -1,17 +1,4 @@
 /* Follows.js */
-.follows {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--sub-color);
-  border-radius: 5px;
-  width: 100%;
-  position: sticky;
-  position: -webkit-sticky;
-  top: 4.5rem;
-  background-color: white;
-}
-
 .follow-user {
   display: flex;
   flex-direction: row;
@@ -19,14 +6,22 @@
 }
 
 .follow-container {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--sub-color);
+  border-radius: 5px;
+  width: 100%;
+  background-color: white;
+}
+
+#follow-container-title {
+  padding: 0.5rem 0.5rem 0;
 }
 
 .follow-container ul {
   list-style: none;
   margin: 0;
-  padding: 0.5rem 0.5rem;
 }
 .follow-container li {
   display: flex;

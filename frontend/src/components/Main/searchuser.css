@@ -1,0 +1,55 @@
+.search-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--sub-color);
+  border-radius: 5px;
+  width: 100%;
+  background-color: white;
+  margin-bottom: 1rem;
+}
+
+#search-container-title {
+  padding: 0.5rem 0.5rem;
+}
+#search-container-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem 0.5rem 0.5rem;
+}
+#person_search {
+  padding: 3px;
+  border-radius: 50%;
+}
+#person_search:hover {
+  background-color: rgb(230, 230, 230);
+}
+#person_add {
+  padding: 3px;
+  border-radius: 50%;
+}
+#person_add:hover {
+  color: green;
+}
+
+.search-container input[type="text"] {
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+}
+
+.search-container ul {
+  list-style: none;
+  margin: 0;
+}
+
+.search-container li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.5rem 0.5rem;
+  border-radius: 5px;
+}
+.search-container li:hover {
+  background-color: rgb(230, 230, 230);
+}

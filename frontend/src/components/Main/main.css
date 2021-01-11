@@ -62,6 +62,13 @@
   padding-block: 1rem;
 }
 
+.sticky-side {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 4.5rem;
+}
+
+/* Query */
 @media screen and (max-width: 820px) {
   .main-tag {
     display: none;

@@ -1,5 +1,6 @@
-from rest_framework import permissions
+from rest_framework import permissions, generics
 from rest_framework.views import APIView
+from rest_framework.filters import SearchFilter
 from rest_framework.response import Response
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 
@@ -9,6 +10,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login
 
 from .models import *
+
+import os, sys
+from django.conf import settings
+sys.path.append(os.path.join(settings.BASE_DIR))
+from feed.models import Feed, AlertFeed
+
 from .serializers import *
 
 class SignUpView(APIView):
@@ -48,8 +55,17 @@ class FollowView(APIView):
         follow_id = request.data['id']
         follow_user = User.objects.get(id=follow_id)
 
+        follow_list = user.user_follow.all()
+        for friend in follow_list:
+            if(friend.follow == follow_user):
+                return Response('Already Following', status=400)
+
         follow = Follow(user=user, follow=follow_user)
         follow.save()
+
+        temp_feed = Feed.objects.get(id=26)
+        alertfeed = AlertFeed(user=follow_user, sender=user, feed=temp_feed, content_type='follow')
+        alertfeed.save()
 
         return Response({
             "username": user.username,
@@ -64,3 +80,8 @@ class FollowView(APIView):
 
         return Response(serializer.data)
 
+class SearchUserView(generics.ListAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    filter_backends = [SearchFilter]
+    search_fields = ['nickname', 'user__username']

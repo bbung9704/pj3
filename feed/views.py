@@ -139,4 +139,9 @@ class AlertFeedView(APIView):
         alertfeed.save()
         return Response('')
     
+    def delete(self, request):
+        id = request.data['id']
+        alertfeed = AlertFeed.objects.get(id=id)
+        alertfeed.delete()
+        return Response('')
 
