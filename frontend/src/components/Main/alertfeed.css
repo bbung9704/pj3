@@ -1,4 +1,7 @@
 .alert-container {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 4.5rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
