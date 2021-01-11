@@ -1,0 +1,36 @@
+.alert-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--sub-color);
+  border-radius: 5px;
+  width: 100%;
+  background-color: white;
+}
+
+#alert-container-title {
+  padding-inline: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.alert-container li {
+  padding: 0.5rem;
+  font-size: 85%;
+  font-weight: 300;
+  border-radius: 5px;
+  color: var(--main-color);
+  cursor: pointer;
+}
+.alert-container li:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+#alert-bold {
+  font-weight: 400;
+  color: black;
+}
+
+#alert-time {
+  font-size: 85%;
+  text-align: right;
+}

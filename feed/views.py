@@ -67,6 +67,9 @@ class CommentView(APIView):
 
         comment = Comment(user=user, feed=feed, body=body)
         comment.save()
+        alert = AlertFeed(user=feed.user, sender=user, feed=feed, \
+         content_type='comment')
+        alert.save()
 
         serializer = CommentSerializer(comment)
 
@@ -107,7 +110,33 @@ class LikeView(APIView):
         new_like.save()
         feed.like = len(feed.feed_like.all())
         feed.save()
+
+        alert = AlertFeed(user=feed.user, sender=user, feed=feed, \
+         content_type='like')
+        alert.save()
+
         return Response({'like': feed.like})
 
+class AlertFeedView(APIView):
+    def get(self, request):
+        user = request.user
+        queryset = user.user_alertfeed.all().order_by('checked', '-created_at')
+        if(len(queryset) >= 10):
+            queryset = queryset[:10]
+        serializer = AlertFeedSerializer(queryset, many=True)
 
+        return Response(serializer.data)
+
+    def post(self, request):
+        user = request.user
+        id = request.data['id']
+        alertfeed = AlertFeed.objects.get(id=id)
+
+        if(alertfeed.checked == True):
+            return Response('')
+
+        alertfeed.checked = True
+        alertfeed.save()
+        return Response('')
+    
 

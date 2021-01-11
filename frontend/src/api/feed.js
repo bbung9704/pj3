@@ -71,3 +71,24 @@ export const makeLike = (token, id, setLike) => {
     .then((res) => setLike(res.data.like))
     .catch((err) => console.error(err.response.data));
 };
+
+export const getAlertFeed = (token, setAlertFeed) => {
+  const config = { headers: { Authorization: `Token ${token}` } };
+
+  console.log("GET_ALERTFEED");
+  axios
+    .get("api/alertfeed/", config)
+    .then((res) => setAlertFeed(res.data))
+    .catch((err) => console.error(err.response.data));
+};
+
+export const checkAlertFeed = (token, id) => {
+  const config = { headers: { Authorization: `Token ${token}` } };
+  const body = { id: id };
+
+  console.log("CHECK_ALERTFEED");
+  axios
+    .post("api/alertfeed/", body, config)
+    .then()
+    .catch((err) => console.error(err.response.data));
+};

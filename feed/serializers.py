@@ -33,3 +33,11 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('id', 'username', 'nickname', 'userimage', 'body', 'created_at')
+
+class AlertFeedSerializer(serializers.ModelSerializer):
+    nickname = serializers.ReadOnlyField(source='sender.profile.nickname')
+    body = serializers.ReadOnlyField(source='feed.body')
+
+    class Meta:
+        model = AlertFeed
+        fields = ('id', 'nickname', 'body', 'content_type', 'created_at', 'checked')
