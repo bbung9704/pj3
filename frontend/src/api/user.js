@@ -68,18 +68,22 @@ export const register = (
     .catch((err) => console.error("signup error"));
 };
 
-export const getFollows = (token, setState) => {
-  const config = { headers: { Authorization: `Token ${token.token}` } };
+export const getFollows = (token, dispatch) => {
+  const config = { headers: { Authorization: `Token ${token}` } };
   axios
     .get("api/auth/follow/", config)
-    .then((res) => setState(res.data))
+    .then((res) => {
+      dispatch({
+        type: "GET_FOLLOWS",
+        payload: res.data,
+      });
+    })
     .catch((err) => console.error("follow error"));
 };
 
 export const makeFollow = (token, id) => {
   const config = { headers: { Authorization: `Token ${token}` } };
   const body = { id: id };
-
   console.log("MAKE_FOLLOW");
   axios
     .post("api/auth/follow/", body, config)

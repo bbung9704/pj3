@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 
 import Avatar from "@material-ui/core/Avatar";
 import "./follows.css";
 
+import { followContext } from "../../context/followContext.js";
+
 import { getFollows } from "../../api/user.js";
 
 const Follows = (token) => {
-  const [users, setFollow] = useState([]);
+  const follow_context = useContext(followContext);
+  const follows = follow_context.followstate.feeds;
 
   useEffect(() => {
-    getFollows(token, setFollow);
+    getFollows(token.token, follow_context.followdispatch);
   }, []);
 
   return (
@@ -17,7 +20,7 @@ const Follows = (token) => {
       <div className="follow-container">
         <ul>
           <div id="follow-container-title">Follow</div>
-          {users.map((follow) => {
+          {follows.map((follow) => {
             return (
               <li key={follow.id} className="follow-user">
                 <Avatar

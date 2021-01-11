@@ -7,8 +7,10 @@ import "./App.css";
 
 import { userContext } from "../context/userContext.js";
 import { feedContext } from "../context/feedContext.js";
+import { followContext } from "../context/followContext.js";
 import userReducer from "../reducers/userReducer.js";
 import feedReducer from "../reducers/feedReducer.js";
+import followReducer from "../reducers/followReducer.js";
 
 import NotFound from "./Layout/NotFound.js";
 import Login from "./User/Login.js";
@@ -26,19 +28,24 @@ const App = () => {
   const [feedstate, feeddispatch] = useReducer(feedReducer, {
     feeds: [],
   });
+  const [followstate, followdispatch] = useReducer(followReducer, {
+    feeds: [],
+  });
 
   return (
     <>
       <userContext.Provider value={{ userstate, userdispatch }}>
         <feedContext.Provider value={{ feedstate, feeddispatch }}>
-          <Router>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
-              <Route component={NotFound} />
-            </Switch>
-          </Router>
+          <followContext.Provider value={{ followstate, followdispatch }}>
+            <Router>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+                <Route component={NotFound} />
+              </Switch>
+            </Router>
+          </followContext.Provider>
         </feedContext.Provider>
       </userContext.Provider>
     </>

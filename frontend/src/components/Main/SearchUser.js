@@ -1,19 +1,29 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 
 import "./searchuser.css";
 
-import { searchUser, makeFollow } from "../../api/user.js";
+import { followContext } from "../../context/followContext.js";
+import { feedContext } from "../../context/feedContext.js";
+
+import { searchUser, makeFollow, getFollows } from "../../api/user.js";
+import { getMainFeed } from "../../api/feed.js";
 
 const SearchUser = (token) => {
   const [results, setResult] = useState([]);
   const searchRef = useRef(false);
+  const follow_context = useContext(followContext);
+  const feed_context = useContext(feedContext);
 
   const search = () => {
     searchUser(token.token, searchRef.current.value, setResult);
   };
 
-  const follow = (id) => {
-    makeFollow(token.token, id);
+  const follow = async (id) => {
+    await makeFollow(token.token, id);
+    await setTimeout(() => {
+      getFollows(token.token, follow_context.followdispatch);
+      getMainFeed(token.token, feed_context.feeddispatch);
+    }, 100);
   };
 
   return (
