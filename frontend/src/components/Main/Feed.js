@@ -1,5 +1,5 @@
 // 작성자(닉네임, 아이디), 작성자 아바타, 작성일시, 내용, 사진(여러장 가능), 댓글, 좋아요
-import React, { useRef, useContext } from "react";
+import React, { useRef, useContext, useState, useEffect } from "react";
 
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
@@ -7,11 +7,16 @@ import "./feed.css";
 
 import { feedContext } from "../../context/feedContext.js";
 import { timeForToday } from "../../api/time.js";
-import { deleteFeed, getMainFeed } from "../../api/feed.js";
+import { deleteFeed, getMainFeed, makeLike } from "../../api/feed.js";
 import Comment from "./Comment.js";
 
 const Feed = (data) => {
   const feedstate = useContext(feedContext);
+
+  const [like_count, setLike] = useState(0);
+  useEffect(() => {
+    setLike(data.data.like);
+  }, []);
 
   const moreToggleRef = useRef(false);
   const moreToggle = () => {
@@ -25,6 +30,10 @@ const Feed = (data) => {
 
   const handleDeleteFeed = () => {
     deleteFeed(data.token, data.data.id, getMainFeed, feedstate.feeddispatch);
+  };
+
+  const handleLike = () => {
+    makeLike(data.token, data.data.id, setLike);
   };
 
   return (
@@ -78,11 +87,16 @@ const Feed = (data) => {
               <Comment id={data.data.id} token={data.token} />
             </ul>
           </div>
-          <Button variant="outlined" size="small">
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={handleLike}
+            id="bottom-icon-btn"
+          >
             <span className="material-icons" id="bottom-icon">
               favorite
             </span>{" "}
-            {data.data.like}
+            {like_count}
           </Button>
         </div>
       </div>

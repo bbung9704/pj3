@@ -89,4 +89,25 @@ class CommentView(APIView):
             return Response('')
         return Response('Access Denies', status=400)
 
+class LikeView(APIView):
+    def post(self, request):
+        user = request.user
+        id = request.data['id']
+        feed = Feed.objects.get(id=id)
+        feed_like = feed.feed_like.all()
+
+        for like in feed_like:
+            if(like.user == user):
+                like.delete()
+                feed.like = len(feed.feed_like.all())
+                feed.save()
+                return Response({'like': feed.like})
+        
+        new_like = Like(feed=feed, user=user)
+        new_like.save()
+        feed.like = len(feed.feed_like.all())
+        feed.save()
+        return Response({'like': feed.like})
+
+
 

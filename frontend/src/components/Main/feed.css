@@ -120,7 +120,9 @@
   font-size: 18px;
   margin-right: 0.3rem;
 }
-
+#bottom-icon-btn:hover #bottom-icon {
+  color: red;
+}
 .comment-container {
   width: 100%;
 }

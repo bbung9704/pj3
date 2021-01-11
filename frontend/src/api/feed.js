@@ -54,8 +54,20 @@ export const deleteComment = (token, id) => {
     headers: { Authorization: `Token ${token}` },
     data: { id: id },
   };
+
   axios
     .delete("api/comment/", config)
     .then((res) => console.log(res.data))
+    .catch((err) => console.error(err.response.data));
+};
+
+export const makeLike = (token, id, setLike) => {
+  const config = { headers: { Authorization: `Token ${token}` } };
+  const body = { id: id };
+
+  console.log("HANDLE_LIKE");
+  axios
+    .post("api/like/", body, config)
+    .then((res) => setLike(res.data.like))
     .catch((err) => console.error(err.response.data));
 };
