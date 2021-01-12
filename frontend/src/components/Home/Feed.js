@@ -38,7 +38,6 @@ const Feed = (data) => {
   const handleLike = () => {
     makeLike(data.token, data.data.id, setLike);
   };
-
   return (
     <>
       <div className="feed-container">
@@ -66,20 +65,18 @@ const Feed = (data) => {
             </ul>
           </div>
         </div>
-        <Link to={`${match.url}/${data.data.id}`}>
-          <p>{data.data.body}</p>
-          <div className="image-container">
-            {data.data.image.map((img) => {
-              return (
-                <img
-                  key={img}
-                  src={img}
-                  style={{ maxWidth: "100%", maxHeight: "300px" }}
-                ></img>
-              );
-            })}
-          </div>
-        </Link>
+        <p>{data.data.body}</p>
+        <div className="image-container">
+          {data.data.image.map((img) => {
+            return (
+              <img
+                key={img}
+                src={img}
+                style={{ maxWidth: "100%", maxHeight: "300px" }}
+              ></img>
+            );
+          })}
+        </div>
         <div className="bottom-container">
           <div className="comment-container">
             <Button variant="outlined" size="small" onClick={commentToggle}>
@@ -89,7 +86,7 @@ const Feed = (data) => {
               {"  Comment"}
             </Button>
             <ul id="comment-toggle" ref={commentToggleRef}>
-              <Comment id={data.data.id} token={data.token} />
+              <Comment id={data.data.id} token={data.token} static={false} />
             </ul>
           </div>
           <Button

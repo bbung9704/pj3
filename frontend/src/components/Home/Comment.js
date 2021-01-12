@@ -9,10 +9,15 @@ import { timeForToday } from "../../api/time.js";
 
 const Comment = (data) => {
   const textRef = useRef(false);
+  const cssRef = useRef(false);
 
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
+    if (data.static) {
+      cssRef.current.style.position = "static";
+      cssRef.current.style.width = "100%";
+    }
     getComment(data.token, data.id, setComments);
   }, []);
 
@@ -40,7 +45,7 @@ const Comment = (data) => {
 
   return (
     <>
-      <div id="comment-item">
+      <div id="comment-item" ref={cssRef}>
         {comments.map((comment) => {
           return (
             <li key={comment.id}>

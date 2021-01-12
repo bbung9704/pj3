@@ -1,5 +1,18 @@
 import axios from "axios";
 
+export const getOneFeed = (token, id, setFeed) => {
+  const config = {
+    headers: { Authorization: `Token ${token}` },
+    params: { id: id },
+  };
+
+  console.log("GET_ONEFEED");
+  axios
+    .get("api/feeddetail/", config)
+    .then((res) => setFeed([res.data]))
+    .catch((err) => console.error(err.response.data));
+};
+
 export const getMainFeed = (token, dispatch) => {
   const config = { headers: { Authorization: `Token ${token}` } };
   axios

@@ -22,7 +22,6 @@
   font-weight: 300;
   border-radius: 5px;
   color: var(--main-color);
-  cursor: pointer;
 }
 .alert-container li:hover {
   background-color: rgb(230, 230, 230);
@@ -42,7 +41,12 @@
 
 #alert-delete {
   font-size: 90%;
+  cursor: pointer;
 }
 #alert-delete:hover {
   color: black;
+}
+
+#alert-link:hover {
+  text-decoration: underline;
 }

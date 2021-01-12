@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useRouteMatch } from "react-router-dom";
 
 import "./alertfeed.css";
 
@@ -11,6 +12,7 @@ import { timeForToday } from "../../api/time.js";
 
 const AlertFeed = (token) => {
   const [alertfeeds, setAlertFeed] = useState([]);
+  const match = useRouteMatch();
 
   function cutStrings(string) {
     if (string.length >= 7) {
@@ -56,9 +58,11 @@ const AlertFeed = (token) => {
                       : {}
                   }
                 >
-                  <span id="alert-bold">{feed.nickname}</span>님이{" "}
-                  <span id="alert-bold">{`'${cutStrings(feed.body)}'`}</span> 에
-                  댓글을 남겼습니다.
+                  <Link to={`${match.url}/${feed.feed_id}`} id="alert-link">
+                    <span id="alert-bold">{feed.nickname}</span>님이{" "}
+                    <span id="alert-bold">{`'${cutStrings(feed.body)}'`}</span>{" "}
+                    에 댓글을 남겼습니다.
+                  </Link>
                   <div id="alert-time">
                     {timeForToday(feed.created_at)}
                     <span
@@ -81,9 +85,11 @@ const AlertFeed = (token) => {
                       : {}
                   }
                 >
-                  <span id="alert-bold">{feed.nickname}</span>님이{" "}
-                  <span id="alert-bold">{`'${cutStrings(feed.body)}'`}</span> 를
-                  좋아합니다.
+                  <Link to={`${match.url}/${feed.feed_id}`} id="alert-link">
+                    <span id="alert-bold">{feed.nickname}</span>님이{" "}
+                    <span id="alert-bold">{`'${cutStrings(feed.body)}'`}</span>{" "}
+                    를 좋아합니다.
+                  </Link>
                   <div id="alert-time">
                     {timeForToday(feed.created_at)}
                     <span

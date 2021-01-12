@@ -7,6 +7,16 @@ from rest_framework.response import Response
 from .models import *
 from .serializers import *
 
+class FeedDetailView(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    def get(self, request):
+        id = request.query_params.get('id')
+        feed = Feed.objects.get(id=id)
+
+        serializer = FeedSerializer(feed)
+
+        return Response(serializer.data)
+
 class FeedView(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
