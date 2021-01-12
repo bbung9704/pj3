@@ -1,10 +1,10 @@
 import React, { useContext, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import "./layout.css";
 import Avatar from "@material-ui/core/Avatar";
 
-import AlertFeed from "../Main/AlertFeed.js";
+import AlertFeed from "../Home/AlertFeed.js";
 
 import { userContext } from "../../context/userContext.js";
 import { logout } from "../../api/user.js";
@@ -41,9 +41,11 @@ const Header = () => {
   return (
     <>
       <div className="sticky-top" ref={barRef}>
-        <h1 id="logo" ref={logoRef}>
-          Project#3
-        </h1>
+        <Link to="/home">
+          <h1 id="logo" ref={logoRef}>
+            Project#3
+          </h1>
+        </Link>
         <div id="head-avatar">
           <div className="head-alert-container" onClick={alertToggle}>
             <div className="material-icons" id="head-alert">

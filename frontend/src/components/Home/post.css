@@ -1,0 +1,14 @@
+.post-input-container {
+  box-sizing: border-box;
+  margin-block: 0.5rem;
+}
+
+.post-input-container input[type="file"] {
+  padding-block: 0.5rem;
+}
+
+.post-bottom-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

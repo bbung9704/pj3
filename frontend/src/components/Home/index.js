@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 
 import "./main.css";
 
@@ -10,12 +10,15 @@ import { getUser } from "../../api/user.js";
 import { getMainFeed } from "../../api/feed.js";
 
 import Header from "../Layout/Header.js";
-import Feed from "./Feed.js";
+import FeedDetail from "./FeedDetail.js";
+import FeedList from "./FeedList.js";
+import Post from "./Post.js";
 import Follows from "./Follows.js";
 import AlertFeed from "./AlertFeed.js";
 import SearchUser from "./SearchUser.js";
+import NotFound from "../Layout/NotFound.js";
 
-const Home = () => {
+const Home = ({ match }) => {
   const userstate = useContext(userContext);
   const userdispatch = userstate.userdispatch;
 
@@ -41,9 +44,14 @@ const Home = () => {
   // console.log(userstate.userstate);
   return (
     <>
+      {/* Loading */}
       <div className="loading-home" ref={loadRef}></div>
+
+      {/* Header */}
       <Header />
+
       <div className="home-container">
+        {/* Face-main */}
         <div className="home-feed">
           <img
             id="home-face"
@@ -51,31 +59,29 @@ const Home = () => {
             alt="home-face"
           ></img>
         </div>
+
         <div className="home-main">
+          {/* Alert-feed */}
           <div className="main-tag">
             <AlertFeed token={userstate.userstate.token} />
           </div>
 
+          {/* Feed-list */}
           <div className="main-feed">
-            <div className="feed">
-              <div className="feed-pencil">
-                Feed
-                <span id="pencil" className="material-icons">
-                  create
-                </span>
-              </div>
-              {feedstate.feedstate.feeds.map((data) => {
-                return (
-                  <Feed
-                    key={data.id}
-                    token={userstate.userstate.token}
-                    data={data}
-                  />
-                );
-              })}
-            </div>
+            <Switch>
+              <Route exact path={match.path}>
+                <FeedList
+                  user={userstate.userstate}
+                  feeds={feedstate.feedstate.feeds}
+                />
+              </Route>
+              <Route path={`${match.path}/post`} component={Post} />
+              <Route path={`${match.path}/:id`} component={FeedDetail} />
+              <Route component={NotFound} />
+            </Switch>
           </div>
 
+          {/* Search and Follow */}
           <div className="main-tag">
             <div className="sticky-side">
               <SearchUser token={userstate.userstate.token} />

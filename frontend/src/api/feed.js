@@ -13,6 +13,20 @@ export const getMainFeed = (token, dispatch) => {
     .catch((err) => console.error(err.response.data, err.response.status));
 };
 
+export const postFeed = (token, form) => {
+  const config = {
+    headers: {
+      Authorization: `Token ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  };
+
+  axios
+    .post("api/feed/", form, config)
+    .then()
+    .catch((err) => console.error(err.response.data));
+};
+
 export const deleteFeed = (token, id, getMainFeed, feeddispatch) => {
   const config = {
     headers: { Authorization: `Token ${token}` },

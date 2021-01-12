@@ -1,5 +1,6 @@
 // 작성자(닉네임, 아이디), 작성자 아바타, 작성일시, 내용, 사진(여러장 가능), 댓글, 좋아요
 import React, { useRef, useContext, useState, useEffect } from "react";
+import { Link, useRouteMatch } from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
@@ -12,6 +13,8 @@ import Comment from "./Comment.js";
 
 const Feed = (data) => {
   const feedstate = useContext(feedContext);
+
+  const match = useRouteMatch();
 
   const [like_count, setLike] = useState(0);
   useEffect(() => {
@@ -63,18 +66,20 @@ const Feed = (data) => {
             </ul>
           </div>
         </div>
-        <p>{data.data.body}</p>
-        <div className="image-container">
-          {data.data.image.map((img) => {
-            return (
-              <img
-                key={img}
-                src={img}
-                style={{ width: "100%", maxWidth: "100%" }}
-              ></img>
-            );
-          })}
-        </div>
+        <Link to={`${match.url}/${data.data.id}`}>
+          <p>{data.data.body}</p>
+          <div className="image-container">
+            {data.data.image.map((img) => {
+              return (
+                <img
+                  key={img}
+                  src={img}
+                  style={{ maxWidth: "100%", maxHeight: "300px" }}
+                ></img>
+              );
+            })}
+          </div>
+        </Link>
         <div className="bottom-container">
           <div className="comment-container">
             <Button variant="outlined" size="small" onClick={commentToggle}>

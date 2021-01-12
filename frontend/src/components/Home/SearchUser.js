@@ -18,6 +18,9 @@ const SearchUser = (token) => {
     const text = searchRef.current.value;
     if (text[0] !== " " && text !== "" && text.length >= 2) {
       searchUser(token.token, text, setResult);
+      searchRef.current.value = "";
+    } else {
+      console.error("2자 이상 입력하세요.");
     }
   };
 

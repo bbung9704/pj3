@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "../User/user.css";
 
 const NotFound = () => {
   return (
     <>
+      <Redirect to="/home" />
       <div className="fullscreen-center">
         <h1 style={{ color: "#f50057" }}>Not Found Page</h1>
         <Link

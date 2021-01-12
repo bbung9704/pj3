@@ -15,7 +15,7 @@ import followReducer from "../reducers/followReducer.js";
 import NotFound from "./Layout/NotFound.js";
 import Login from "./User/Login.js";
 import Register from "./User/Register.js";
-import Home from "./Main/Home.js";
+import Home from "./Home";
 
 const App = () => {
   const [userstate, userdispatch] = useReducer(userReducer, {
@@ -39,10 +39,10 @@ const App = () => {
           <followContext.Provider value={{ followstate, followdispatch }}>
             <Router>
               <Switch>
-                <Route exact path="/" component={Home} />
+                <Route path="/home" component={Home} />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
-                <Route component={NotFound} />
+                <Route exact path="/" component={NotFound} />
               </Switch>
             </Router>
           </followContext.Provider>

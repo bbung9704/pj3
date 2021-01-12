@@ -54,6 +54,8 @@ class FollowView(APIView):
         user = request.user
         follow_id = request.data['id']
         follow_user = User.objects.get(id=follow_id)
+        if(user == follow_user):
+            return Response('Cannot Follow Yourself', status=400)
 
         follow_list = user.user_follow.all()
         for friend in follow_list:
