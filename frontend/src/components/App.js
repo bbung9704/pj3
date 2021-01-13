@@ -27,6 +27,7 @@ const App = () => {
   });
   const [feedstate, feeddispatch] = useReducer(feedReducer, {
     feeds: [],
+    pages: 1,
   });
   const [followstate, followdispatch] = useReducer(followReducer, {
     feeds: [],

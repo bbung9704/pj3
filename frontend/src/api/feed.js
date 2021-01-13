@@ -13,10 +13,10 @@ export const getOneFeed = (token, id, setFeed) => {
     .catch((err) => console.error(err.response.data));
 };
 
-export const getMainFeed = (token, dispatch) => {
+export const getMainFeed = (token, page, dispatch) => {
   const config = { headers: { Authorization: `Token ${token}` } };
   axios
-    .get("api/feed/", config)
+    .get(`api/feed?page=${page}`, config)
     .then((res) => {
       dispatch({
         type: "GET_MAINFEED",

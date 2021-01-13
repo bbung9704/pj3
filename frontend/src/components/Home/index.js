@@ -22,15 +22,11 @@ const Home = ({ match }) => {
   const userstate = useContext(userContext);
   const userdispatch = userstate.userdispatch;
 
-  const feedstate = useContext(feedContext);
-  const feeddispatch = feedstate.feeddispatch;
-
   const loadRef = useRef(false);
 
   let history = useHistory();
 
   useEffect(() => {
-    getMainFeed(userstate.userstate.token, feeddispatch);
     setTimeout(() => {
       loadRef.current.classList.toggle("active");
     }, 500);
@@ -70,10 +66,7 @@ const Home = ({ match }) => {
           <div className="main-feed">
             <Switch>
               <Route exact path={match.path}>
-                <FeedList
-                  user={userstate.userstate}
-                  feeds={feedstate.feedstate.feeds}
-                />
+                <FeedList user={userstate.userstate} />
               </Route>
               <Route path={`${match.path}/post`} component={Post} />
               <Route path={`${match.path}/:id`} component={FeedDetail} />

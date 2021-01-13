@@ -4,7 +4,8 @@ function feedReducer(state, action) {
       console.log("GET_MAINFEED");
       return {
         ...state,
-        feeds: action.payload,
+        feeds: state.feeds.concat(action.payload.results),
+        pages: Math.ceil(action.payload.count / 3),
       };
     default:
       return { ...state };

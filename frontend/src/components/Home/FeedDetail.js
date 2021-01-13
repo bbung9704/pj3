@@ -9,10 +9,11 @@ import Feed from "./Feed.js";
 const FeedDetail = ({ match, history }) => {
   const userstate = useContext(userContext);
   const [feed, setFeed] = useState([]);
+  const [match_id, setId] = useState(null);
 
   useEffect(() => {
     getOneFeed(userstate.userstate.token, match.params.id, setFeed);
-  }, []);
+  }, [match]);
 
   return (
     <>

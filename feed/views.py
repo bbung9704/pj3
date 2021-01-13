@@ -6,6 +6,7 @@ from rest_framework.response import Response
 
 from .models import *
 from .serializers import *
+from .pagination import FeedPagination
 
 class FeedDetailView(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -17,7 +18,7 @@ class FeedDetailView(APIView):
 
         return Response(serializer.data)
 
-class FeedView(APIView):
+class FeedView(APIView, FeedPagination):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     # Serializer로 validate check하게 바꾸기
@@ -52,9 +53,10 @@ class FeedView(APIView):
             queryset = queryset | follow.user_feed.all()
 
         queryset = queryset.order_by('-created_at')
-        serializer = FeedSerializer(queryset, many=True)
+        results = self.paginate_queryset(queryset, request, view=self)
+        serializer = FeedSerializer(results, many=True)
 
-        return Response(serializer.data)
+        return self.get_paginated_response(serializer.data)
 
     def delete(self, request):
         user = request.user
