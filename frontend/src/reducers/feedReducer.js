@@ -5,7 +5,8 @@ function feedReducer(state, action) {
       return {
         ...state,
         feeds: state.feeds.concat(action.payload.results),
-        pages: Math.ceil(action.payload.count / 3),
+        pages: Math.ceil(action.payload.count / 5),
+        page: state.page + 1,
       };
     default:
       return { ...state };

@@ -13,12 +13,11 @@ const FeedList = (data) => {
   const user = data.user;
   const feeds = feedstate.feedstate.feeds;
   const match = useRouteMatch();
-  const [page, setPage] = useState(1);
+  const page = feedstate.feedstate.page;
 
   const moreFeed = () => {
     if (page <= feedstate.feedstate.pages) {
       getMainFeed(user.token, page, feeddispatch);
-      setPage((prev) => prev + 1);
     }
   };
   const loader = useRef(moreFeed);
@@ -35,6 +34,12 @@ const FeedList = (data) => {
   );
 
   const [element, setElement] = useState(null);
+
+  useEffect(() => {
+    feeddispatch({
+      type: "RESET_FEED",
+    });
+  }, []);
 
   useEffect(() => {
     loader.current = moreFeed;
