@@ -13,6 +13,21 @@ export const getOneFeed = (token, id, setFeed) => {
     .catch((err) => console.error(err.response.data));
 };
 
+export const getUserFeed = (token, username, page, setState) => {
+  const config = { headers: { Authorization: `Token ${token}` } };
+  axios
+    .get(`api/userfeed?username=${username}&page=${page}`, config)
+    .then((res) =>
+      setState((prev) => ({
+        ...prev,
+        pages: Math.ceil(res.data.count / 5),
+        page: prev.page + 1,
+        feeds: prev.feeds.concat(res.data.results),
+      }))
+    )
+    .catch((err) => console.error(err.response.data));
+};
+
 export const getMainFeed = (token, page, dispatch) => {
   const config = { headers: { Authorization: `Token ${token}` } };
   axios
@@ -40,7 +55,7 @@ export const postFeed = (token, form) => {
     .catch((err) => console.error(err.response.data));
 };
 
-export const deleteFeed = (token, id, getMainFeed, feeddispatch) => {
+export const deleteFeed = (token, id, feeddispatch) => {
   const config = {
     headers: { Authorization: `Token ${token}` },
     data: { id: id },

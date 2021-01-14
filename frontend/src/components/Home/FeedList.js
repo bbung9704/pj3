@@ -85,7 +85,7 @@ const FeedList = (data) => {
         {feeds.map((feed) => {
           return (
             <div key={feed.id} id={`feed-${feed.id}`}>
-              <Feed token={user.token} data={feed} />
+              <Feed token={user.token} data={feed} match={match} />
             </div>
           );
         })}

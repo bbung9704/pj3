@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useRouteMatch } from "react-router-dom";
 
 import "./layout.css";
 import Avatar from "@material-ui/core/Avatar";
@@ -10,6 +10,7 @@ import { userContext } from "../../context/userContext.js";
 import { logout } from "../../api/user.js";
 
 const Header = () => {
+  const match = useRouteMatch();
   const history = useHistory();
   const userstate = useContext(userContext);
   const userdispatch = userstate.userdispatch;
@@ -37,7 +38,6 @@ const Header = () => {
   const alertToggle = () => {
     alertRef.current.classList.toggle("active");
   };
-
   return (
     <>
       <div className="sticky-top" ref={barRef}>
@@ -66,7 +66,12 @@ const Header = () => {
       </div>
       <div className="slide-in" ref={slideRef}>
         <ul>
-          <li>{userstate.userstate.nickname}</li>
+          <Link
+            to={`${match.url}/user/${userstate.userstate.username}`}
+            onClick={slide}
+          >
+            <li>{userstate.userstate.nickname}</li>
+          </Link>
           <li>My Account</li>
           <li onClick={doLogout}>Logout</li>
         </ul>

@@ -100,3 +100,15 @@ export const searchUser = (token, content, setResult) => {
     .then((res) => setResult(res.data))
     .catch((err) => console.error(err.response.data));
 };
+
+export const userDetail = (token, username, setUserInfo) => {
+  const config = {
+    headers: { Authorization: `Token ${token}` },
+    params: { username: username },
+  };
+
+  axios
+    .get("api/auth/userdetail/", config)
+    .then((res) => setUserInfo(res.data))
+    .catch((err) => console.error(err.response.data));
+};

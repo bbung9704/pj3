@@ -4,6 +4,7 @@ from .views import *
 urlpatterns = [
     path('feed/', FeedView.as_view()),
     path('feeddetail/', FeedDetailView.as_view()),
+    path('userfeed/', UserFeedView.as_view()),
     path('comment/', CommentView.as_view()),
     path('like/', LikeView.as_view()),
     path('alertfeed/', AlertFeedView.as_view()),

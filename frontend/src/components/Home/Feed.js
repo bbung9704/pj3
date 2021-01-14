@@ -8,13 +8,11 @@ import "./feed.css";
 
 import { feedContext } from "../../context/feedContext.js";
 import { timeForToday } from "../../api/time.js";
-import { deleteFeed, getMainFeed, makeLike } from "../../api/feed.js";
+import { deleteFeed, makeLike } from "../../api/feed.js";
 import Comment from "./Comment.js";
 
 const Feed = (data) => {
   const feedstate = useContext(feedContext);
-
-  const match = useRouteMatch();
 
   const [like_count, setLike] = useState(0);
   const imgContainerRef = useRef(false);
@@ -35,7 +33,7 @@ const Feed = (data) => {
   };
 
   const handleDeleteFeed = () => {
-    deleteFeed(data.token, data.data.id, getMainFeed, feedstate.feeddispatch);
+    deleteFeed(data.token, data.data.id, feedstate.feeddispatch);
   };
 
   const handleLike = () => {
@@ -61,21 +59,24 @@ const Feed = (data) => {
     }
   };
 
+  // console.log(data);
   return (
     <>
       <div className="feed-container">
         <div className="user">
-          <div id="feed-user">
-            <Avatar
-              alt={data.data.username}
-              src={data.data.userimage}
-              style={{ width: "35px", height: "35px" }}
-            />
-            <span className="user-nick">{data.data.nickname}</span>
-            <span className="user-time">{`@${
-              data.data.username
-            }・${timeForToday(data.data.created_at)}`}</span>
-          </div>
+          <Link to={`/home/user/${data.data.username}`}>
+            <div id="feed-user">
+              <Avatar
+                alt={data.data.username}
+                src={data.data.userimage}
+                style={{ width: "35px", height: "35px" }}
+              />
+              <span className="user-nick">{data.data.nickname}</span>
+              <span className="user-time">{`@${
+                data.data.username
+              }・${timeForToday(data.data.created_at)}`}</span>
+            </div>
+          </Link>
           <div id="feed-toggle" onClick={moreToggle}>
             <span id="icons" className="material-icons">
               more_horiz

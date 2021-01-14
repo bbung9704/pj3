@@ -18,6 +18,20 @@ class FeedDetailView(APIView):
 
         return Response(serializer.data)
 
+class UserFeedView(APIView, FeedPagination):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get(self, request):
+        user = request.user
+        username = request.query_params.get('username')
+        feed_user = User.objects.get(username=username)
+        feeds = feed_user.user_feed.all().order_by('-created_at')
+
+        results = self.paginate_queryset(feeds, request, view=self)
+        serializer = FeedSerializer(results, many=True)
+        return self.get_paginated_response(serializer.data)
+
+
 class FeedView(APIView, FeedPagination):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 

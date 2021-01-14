@@ -4,10 +4,8 @@ import { Route, Switch, useHistory } from "react-router-dom";
 import "./main.css";
 
 import { userContext } from "../../context/userContext.js";
-import { feedContext } from "../../context/feedContext.js";
 
 import { getUser } from "../../api/user.js";
-import { getMainFeed } from "../../api/feed.js";
 
 import Header from "../Layout/Header.js";
 import FeedDetail from "./FeedDetail.js";
@@ -17,6 +15,7 @@ import Follows from "./Follows.js";
 import AlertFeed from "./AlertFeed.js";
 import SearchUser from "./SearchUser.js";
 import NotFound from "../Layout/NotFound.js";
+import UserPage from "./UserPage";
 
 const Home = ({ match }) => {
   const userstate = useContext(userContext);
@@ -42,12 +41,10 @@ const Home = ({ match }) => {
     <>
       {/* Loading */}
       <div className="loading-home" ref={loadRef}></div>
-
       {/* Header */}
       <Header />
 
       <div className="home-container">
-        {/* Face-main */}
         <div className="home-feed">
           <img
             id="home-face"
@@ -57,24 +54,22 @@ const Home = ({ match }) => {
         </div>
 
         <div className="home-main">
-          {/* Alert-feed */}
           <div className="main-tag">
             <AlertFeed token={userstate.userstate.token} />
           </div>
 
-          {/* Feed-list */}
           <div className="main-feed">
             <Switch>
               <Route exact path={match.path}>
                 <FeedList user={userstate.userstate} />
               </Route>
               <Route path={`${match.path}/post`} component={Post} />
+              <Route path={`${match.path}/user`} component={UserPage} />
               <Route path={`${match.path}/:id`} component={FeedDetail} />
               <Route component={NotFound} />
             </Switch>
           </div>
 
-          {/* Search and Follow */}
           <div className="main-tag">
             <div className="sticky-side">
               <SearchUser token={userstate.userstate.token} />
@@ -82,6 +77,7 @@ const Home = ({ match }) => {
             </div>
           </div>
         </div>
+
         <div className="home-footer"></div>
       </div>
     </>

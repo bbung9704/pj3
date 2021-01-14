@@ -87,3 +87,12 @@ class SearchUserView(generics.ListAPIView):
     serializer_class = ProfileSerializer
     filter_backends = [SearchFilter]
     search_fields = ['nickname', 'user__username']
+
+class UserDetailView(APIView):
+    def get(self, request):
+        username = request.query_params.get('username')
+        user = User.objects.get(username=username)
+
+        serializer = UserFollowInfoSerializer(user)
+
+        return Response(serializer.data)

@@ -57,11 +57,6 @@ const AlertFeed = (token) => {
                     <span id="alert-bold">{feed.nickname}</span>님이{" "}
                     <span id="alert-bold">{`'${cutStrings(feed.body)}'`}</span>{" "}
                     에 댓글을 남겼습니다.
-                    {/* {feed.check ? null : (
-                      <span className="material-icons" id="alert-new">
-                        fiber_new
-                      </span>
-                    )} */}
                   </Link>
                   <div id="alert-time">
                     {timeForToday(feed.created_at)}
@@ -86,11 +81,6 @@ const AlertFeed = (token) => {
                     <span id="alert-bold">{feed.nickname}</span>님이{" "}
                     <span id="alert-bold">{`'${cutStrings(feed.body)}'`}</span>{" "}
                     를 좋아합니다.
-                    {/* {feed.check ? null : (
-                      <span className="material-icons" id="alert-new">
-                        fiber_new
-                      </span>
-                    )} */}
                   </Link>
                   <div id="alert-time">
                     {timeForToday(feed.created_at)}
@@ -106,13 +96,14 @@ const AlertFeed = (token) => {
             case "follow":
               return (
                 <li key={feed.id}>
-                  <span id="alert-bold">{feed.nickname}</span>님이 회원님을
-                  팔로우 합니다.
-                  {/* {feed.check ? <span>hi</span> : (
-                    <span className="material-icons" id="alert-new">
-                      fiber_new
-                    </span>
-                  )} */}
+                  <Link
+                    to={`${match.url}/user/${feed.username}`}
+                    id="alert-link"
+                    onClick={() => checkAlert(feed.id, feed.checked)}
+                  >
+                    <span id="alert-bold">{feed.nickname}</span>님이 회원님을
+                    팔로우 합니다.
+                  </Link>
                   <div id="alert-time">
                     {timeForToday(feed.created_at)}
                     <span

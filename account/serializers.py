@@ -17,3 +17,23 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('id', 'username', 'nickname', 'image')
+
+class UserFollowInfoSerializer(serializers.ModelSerializer):
+    nickname = serializers.ReadOnlyField(source='profile.nickname')
+    image = serializers.ReadOnlyField(source='profile.image.url')
+    follow = serializers.SerializerMethodField()
+    follower = serializers.SerializerMethodField()
+    feed = serializers.SerializerMethodField()
+
+    def get_follow(self, obj):
+        return len(obj.user_follow.all())
+
+    def get_follower(self, obj):
+        return len(obj.user_follower.all())
+
+    def get_feed(self, obj):
+        return len(obj.user_feed.all())
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'nickname', 'image', 'follow', 'follower', 'feed')
