@@ -27,10 +27,12 @@ const Comment = (data) => {
   }
 
   const postCommentBtn = async () => {
-    await postComment(data.token, data.id, textRef.current.value);
-    await setTimeout(() => {
-      getComment(data.token, data.id, setComments);
-    }, 100);
+    if (textRef.current.value !== "") {
+      await postComment(data.token, data.id, textRef.current.value);
+      await setTimeout(() => {
+        getComment(data.token, data.id, setComments);
+      }, 100);
+    }
 
     textRef.current.value = "";
     textRef.current.style.height = "1.8rem";

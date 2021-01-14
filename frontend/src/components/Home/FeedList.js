@@ -60,16 +60,27 @@ const FeedList = (data) => {
     };
   }, [element]);
 
+  const refreshFeed = () => {
+    feeddispatch({
+      type: "RESET_FEEDS",
+    });
+  };
+
   return (
     <>
       <div className="feed">
         <div className="feed-pencil">
           Feed
-          <Link to={`${match.url}/post`}>
-            <span id="pencil" className="material-icons">
-              create
+          <div>
+            <span id="pencil" className="material-icons" onClick={refreshFeed}>
+              refresh
             </span>
-          </Link>
+            <Link to={`${match.url}/post`}>
+              <span id="pencil" className="material-icons">
+                create
+              </span>
+            </Link>
+          </div>
         </div>
         {feeds.map((feed) => {
           return (

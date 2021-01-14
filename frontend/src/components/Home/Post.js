@@ -46,7 +46,9 @@ const Post = ({ history }) => {
 
     postFeed(userstate.userstate.token, form);
     setTimeout(() => {
-      getMainFeed(userstate.userstate.token, feedstate.feeddispatch);
+      feedstate.feeddispatch({
+        type: "RESET_FEEDS",
+      });
       history.push("/home");
     }, 100);
   };

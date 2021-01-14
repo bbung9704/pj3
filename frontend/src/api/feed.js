@@ -47,7 +47,11 @@ export const deleteFeed = (token, id, getMainFeed, feeddispatch) => {
   };
   axios
     .delete("api/feed/", config)
-    .then(() => getMainFeed(token, feeddispatch))
+    .then(() =>
+      feeddispatch({
+        type: "RESET_FEEDS",
+      })
+    )
     .catch((err) => console.error(err.response.data));
 };
 

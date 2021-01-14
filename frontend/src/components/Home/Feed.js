@@ -17,7 +17,10 @@ const Feed = (data) => {
   const match = useRouteMatch();
 
   const [like_count, setLike] = useState(0);
+  const imgContainerRef = useRef(false);
+
   useEffect(() => {
+    imgContainerRef.current.style.width = `${data.data.image.length * 100}%`;
     setLike(data.data.like);
   }, []);
 
@@ -38,6 +41,26 @@ const Feed = (data) => {
   const handleLike = () => {
     makeLike(data.token, data.data.id, setLike);
   };
+
+  const [counter, setCounter] = useState(1);
+  const getPrev = () => {
+    if (counter > 1) {
+      const size = 100 / data.data.image.length;
+      imgContainerRef.current.style.transform =
+        "translateX(" + -size * (counter - 2) + "%)";
+      setCounter((prev) => prev - 1);
+    }
+  };
+
+  const getNext = () => {
+    if (counter < data.data.image.length) {
+      const size = 100 / data.data.image.length;
+      imgContainerRef.current.style.transform =
+        "translateX(" + -size * counter + "%)";
+      setCounter((prev) => prev + 1);
+    }
+  };
+
   return (
     <>
       <div className="feed-container">
@@ -66,22 +89,32 @@ const Feed = (data) => {
           </div>
         </div>
         <p>{data.data.body}</p>
-        <div className="image-container">
-          {data.data.image.map((img) => {
-            return (
-              <img
-                key={img}
-                src={img}
-                style={{ maxWidth: "100%", maxHeight: "300px" }}
-              ></img>
-            );
-          })}
+        <div className="overflow-hidden">
+          <div className="image-container" ref={imgContainerRef}>
+            {data.data.image.map((img) => {
+              return (
+                <div key={img} className="image-wrapper">
+                  <img id="image-sizing" src={img} />
+                </div>
+              );
+            })}
+          </div>
+          {data.data.image.length > 1 ? (
+            <>
+              <div id="prevBtn" onClick={getPrev}>
+                <img src="/media/home/prev.png" />
+              </div>
+              <div id="nextBtn" onClick={getNext}>
+                <img src="/media/home/next.png" />
+              </div>
+            </>
+          ) : null}
         </div>
         <div className="bottom-container">
           <div className="comment-container">
             <Button variant="outlined" size="small" onClick={commentToggle}>
               <span className="material-icons" id="bottom-icon">
-                comment
+                <span>comment</span>
               </span>{" "}
               {"  Comment"}
             </Button>

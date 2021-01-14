@@ -50,3 +50,7 @@
 #alert-link:hover {
   text-decoration: underline;
 }
+
+#alert-new {
+  font-size: 1rem;
+}

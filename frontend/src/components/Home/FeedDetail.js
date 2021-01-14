@@ -13,7 +13,7 @@ const FeedDetail = ({ match, history }) => {
   const [feed, setFeed] = useState([]);
 
   const moveBack = () => {
-    history.goBack();
+    history.push("/home");
   };
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const FeedDetail = ({ match, history }) => {
             onClick={moveBack}
             id="bottom-icon-btn"
           >
-            Back
+            Home
           </Button>
         </div>
         {feed.map((data) => {

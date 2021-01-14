@@ -82,6 +82,7 @@ const Home = ({ match }) => {
             </div>
           </div>
         </div>
+        <div className="home-footer"></div>
       </div>
     </>
   );

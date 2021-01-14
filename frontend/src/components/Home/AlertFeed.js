@@ -48,20 +48,20 @@ const AlertFeed = (token) => {
           switch (feed.content_type) {
             case "comment":
               return (
-                <li
-                  key={feed.id}
-                  style={
-                    feed.checked
-                      ? {
-                          backgroundColor: "rgb(230, 230, 230)",
-                        }
-                      : {}
-                  }
-                >
-                  <Link to={`${match.url}/${feed.feed_id}`} id="alert-link">
+                <li key={feed.id}>
+                  <Link
+                    to={`${match.url}/${feed.feed_id}`}
+                    id="alert-link"
+                    onClick={() => checkAlert(feed.id, feed.checked)}
+                  >
                     <span id="alert-bold">{feed.nickname}</span>님이{" "}
                     <span id="alert-bold">{`'${cutStrings(feed.body)}'`}</span>{" "}
                     에 댓글을 남겼습니다.
+                    {/* {feed.check ? null : (
+                      <span className="material-icons" id="alert-new">
+                        fiber_new
+                      </span>
+                    )} */}
                   </Link>
                   <div id="alert-time">
                     {timeForToday(feed.created_at)}
@@ -77,18 +77,20 @@ const AlertFeed = (token) => {
 
             case "like":
               return (
-                <li
-                  key={feed.id}
-                  style={
-                    feed.checked
-                      ? { backgroundColor: "rgb(230, 230, 230)" }
-                      : {}
-                  }
-                >
-                  <Link to={`${match.url}/${feed.feed_id}`} id="alert-link">
+                <li key={feed.id}>
+                  <Link
+                    to={`${match.url}/${feed.feed_id}`}
+                    id="alert-link"
+                    onClick={() => checkAlert(feed.id, feed.checked)}
+                  >
                     <span id="alert-bold">{feed.nickname}</span>님이{" "}
                     <span id="alert-bold">{`'${cutStrings(feed.body)}'`}</span>{" "}
                     를 좋아합니다.
+                    {/* {feed.check ? null : (
+                      <span className="material-icons" id="alert-new">
+                        fiber_new
+                      </span>
+                    )} */}
                   </Link>
                   <div id="alert-time">
                     {timeForToday(feed.created_at)}
@@ -103,16 +105,14 @@ const AlertFeed = (token) => {
               );
             case "follow":
               return (
-                <li
-                  key={feed.id}
-                  style={
-                    feed.checked
-                      ? { backgroundColor: "rgb(230, 230, 230)" }
-                      : {}
-                  }
-                >
+                <li key={feed.id}>
                   <span id="alert-bold">{feed.nickname}</span>님이 회원님을
                   팔로우 합니다.
+                  {/* {feed.check ? <span>hi</span> : (
+                    <span className="material-icons" id="alert-new">
+                      fiber_new
+                    </span>
+                  )} */}
                   <div id="alert-time">
                     {timeForToday(feed.created_at)}
                     <span

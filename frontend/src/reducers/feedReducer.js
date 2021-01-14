@@ -8,6 +8,13 @@ function feedReducer(state, action) {
         pages: Math.ceil(action.payload.count / 5),
         page: state.page + 1,
       };
+    case "RESET_FEEDS":
+      return {
+        ...state,
+        feeds: [],
+        pages: 1,
+        page: 1,
+      };
     default:
       return { ...state };
   }
