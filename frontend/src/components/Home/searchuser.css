@@ -25,13 +25,6 @@
 #person_search:hover {
   background-color: rgb(230, 230, 230);
 }
-#person_add {
-  padding: 3px;
-  border-radius: 50%;
-}
-#person_add:hover {
-  color: green;
-}
 
 .search-container input[type="text"] {
   border: 1px solid var(--main-color);

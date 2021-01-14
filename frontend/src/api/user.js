@@ -88,6 +88,18 @@ export const makeFollow = (token, id) => {
   axios
     .post("api/auth/follow/", body, config)
     .then()
+    .catch((err) => console.error(err.response));
+};
+
+export const deleteFollow = (token, id) => {
+  const config = {
+    headers: { Authorization: `Token ${token}` },
+    data: { id: id },
+  };
+
+  axios
+    .delete("api/auth/follow/", config)
+    .then()
     .catch((err) => console.error(err.response.data));
 };
 
@@ -109,6 +121,8 @@ export const userDetail = (token, username, setUserInfo) => {
 
   axios
     .get("api/auth/userdetail/", config)
-    .then((res) => setUserInfo(res.data))
+    .then((res) => {
+      setUserInfo(res.data);
+    })
     .catch((err) => console.error(err.response.data));
 };

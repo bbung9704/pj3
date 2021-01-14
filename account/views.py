@@ -74,6 +74,22 @@ class FollowView(APIView):
             "follow": follow_user.username
         })
 
+    def delete(self, request):
+        user = request.user
+        id = request.data['id']
+        follows = user.user_follow.all()
+        target = None
+
+        for follow in follows:
+            if follow.follow.id == id:
+                target = follow
+                break;
+        
+        if (target):
+            follow.delete()
+            return Response("")
+        return Response("Cannot find user", status=400)
+
     def get(self, request):
         user = request.user
         queryset = user.user_follow.all()
@@ -90,9 +106,31 @@ class SearchUserView(generics.ListAPIView):
 
 class UserDetailView(APIView):
     def get(self, request):
-        username = request.query_params.get('username')
-        user = User.objects.get(username=username)
+        user = request.user
+        target_name = request.query_params.get('username')
+        target = User.objects.get(username=target_name)
 
-        serializer = UserFollowInfoSerializer(user)
+        id = target.id
+        nickname = target.profile.nickname
+        image = target.profile.image.url
+        follow = len(target.user_follow.all())
+        follower = len(target.user_follower.all())
+        feed = len(target.user_feed.all())
+        relation = False
 
-        return Response(serializer.data)
+        follows = user.user_follow.all()
+        for fol in follows:
+            if(fol.follow.username == target_name):
+                relation = True
+                break
+
+        return Response({
+            "id": id,
+            "nickname": nickname,
+            "username": target.username,
+            "image": image,
+            "follow": follow,
+            "follower": follower,
+            "feed": feed,
+            "relation": relation
+        })

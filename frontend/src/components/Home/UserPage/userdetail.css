@@ -31,3 +31,24 @@
   color: black;
   font-size: 1rem;
 }
+
+#user-btn {
+  height: 2rem;
+  margin-left: 0.3rem;
+}
+
+#person_add {
+  font-size: 1.3rem;
+}
+
+#person_disadd {
+  font-size: 1.3rem;
+}
+
+#user-btn:hover #person_add {
+  color: green;
+}
+
+#user-btn:hover #person_disadd {
+  color: red;
+}

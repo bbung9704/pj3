@@ -6,8 +6,14 @@ import "../feed.css";
 import "./userdetail.css";
 
 import { userContext } from "../../../context/userContext.js";
-import { userDetail } from "../../../api/user.js";
-import { getUserFeed } from "../../../api/feed.js";
+import { followContext } from "../../../context/followContext.js";
+import { feedContext } from "../../../context/feedContext";
+import {
+  userDetail,
+  makeFollow,
+  deleteFollow,
+  getFollows,
+} from "../../../api/user.js";
 
 import UserFeedList from "./UserFeedList.js";
 
@@ -15,7 +21,8 @@ import UserFeedList from "./UserFeedList.js";
 // 팔로잉, 언팔로잉
 const UserDetail = ({ match, history }) => {
   const userstate = useContext(userContext).userstate;
-
+  const followdispatch = useContext(followContext).followdispatch;
+  const feeddispatch = useContext(feedContext).feeddispatch;
   const [userinfo, setUserInfo] = useState({
     id: null,
     username: null,
@@ -23,12 +30,7 @@ const UserDetail = ({ match, history }) => {
     image: null,
     follow: 0,
     follower: 0,
-  });
-
-  const [userfeed, setUserFeed] = useState({
-    pages: 1,
-    page: 1,
-    feeds: [],
+    relation: false,
   });
 
   useEffect(() => {
@@ -39,19 +41,65 @@ const UserDetail = ({ match, history }) => {
     history.push("/home");
   };
 
+  const follow = async (id) => {
+    await makeFollow(userstate.token, id);
+    await setTimeout(() => {
+      getFollows(userstate.token, followdispatch);
+      feeddispatch({
+        type: "RESET_FEEDS",
+      });
+    }, 100);
+  };
+
+  const unFollow = async (id) => {
+    await deleteFollow(userstate.token, id);
+    await setTimeout(() => {
+      getFollows(userstate.token, followdispatch);
+      feeddispatch({
+        type: "RESET_FEEDS",
+      });
+    }, 100);
+  };
+
   return (
     <>
       <div className="feed">
         <div id="feed-detail-head">
           UserDetail
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={moveBack}
-            id="bottom-icon-btn"
-          >
-            Home
-          </Button>
+          <div>
+            {userinfo.username ===
+            userstate.username ? null : userinfo.relation ? (
+              <Button
+                variant="outlined"
+                size="small"
+                id="user-btn"
+                onClick={() => unFollow(userinfo.id)}
+              >
+                <span className="material-icons" id="person_disadd">
+                  person_add_disabled
+                </span>
+              </Button>
+            ) : (
+              <Button
+                variant="outlined"
+                size="small"
+                id="user-btn"
+                onClick={() => follow(userinfo.id)}
+              >
+                <span className="material-icons" id="person_add">
+                  person_add
+                </span>
+              </Button>
+            )}
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={moveBack}
+              id="user-btn"
+            >
+              Home
+            </Button>
+          </div>
         </div>
         <div className="user-profile">
           <Avatar
