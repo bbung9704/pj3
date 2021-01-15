@@ -29,16 +29,26 @@ const Post = ({ history }) => {
   const feedstate = useContext(feedContext);
   const fileRef = useRef(false);
   const bodyRef = useRef(false);
+  const tagRef = useRef(false);
 
   const moveBack = () => {
     history.goBack();
   };
 
-  const test = () => {
+  const posting = () => {
+    let body = bodyRef.current.value;
+    body = body.replace(/(?:\r\n|\r|\n)/g, "<br />");
     const form = new FormData();
     const files = fileRef.current.files;
 
-    form.append("body", bodyRef.current.value);
+    let tags = tagRef.current.value;
+    tags = tags.split(", ");
+
+    for (let j = 0; j < tags.length; j++) {
+      form.append("tag", tags[j]);
+    }
+
+    form.append("body", body);
 
     for (let i = 0; i < files.length; i++) {
       form.append("image", files[i]);
@@ -73,12 +83,22 @@ const Post = ({ history }) => {
           multiple
           ref={fileRef}
         />
+        <CssTextField
+          id="outlined-multiline-flexible"
+          variant="outlined"
+          label="Tag"
+          size="small"
+          rows={1}
+          placeholder="ex) tag1, tag2, tag3"
+          inputRef={tagRef}
+          fullWidth={true}
+        />
       </div>
       <div className="post-bottom-btn">
         <Button variant="contained" size="small" onClick={moveBack}>
           Back
         </Button>
-        <Button variant="contained" size="small" onClick={test}>
+        <Button variant="contained" size="small" onClick={posting}>
           Submit
         </Button>
       </div>

@@ -7,11 +7,17 @@ class FeedImageSerializer(serializers.ModelSerializer):
         model = FeedImage
         fields = ('image')
 
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ('tag',)
+
 class FeedSerializer(serializers.ModelSerializer):
     # User
     username = serializers.ReadOnlyField(source='user.username')
     nickname = serializers.ReadOnlyField(source='user.profile.nickname')
     userimage = serializers.ReadOnlyField(source='user.profile.image.url')
+    tags = TagSerializer(source='tag', read_only=True, many=True)
     # FeedImage
     image = serializers.SerializerMethodField()
 
@@ -21,7 +27,7 @@ class FeedSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Feed
-        fields = ('id', 'body', 'like', 'created_at', 'username', 'nickname', 'userimage','image')
+        fields = ('id', 'body', 'like', 'created_at', 'username', 'nickname', 'userimage','image', 'tags')
 
 class CommentSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')

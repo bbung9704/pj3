@@ -1,5 +1,5 @@
 import React, { useRef, useContext, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 
 import { TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
@@ -42,6 +42,12 @@ const Login = () => {
       );
     }, 500);
   };
+
+  useEffect(() => {
+    if (userstate.userstate.token) {
+      return <Redirect to="/home" />;
+    }
+  }, [userstate.userstate.token]);
 
   return (
     <>

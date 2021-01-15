@@ -7,6 +7,7 @@ import Avatar from "@material-ui/core/Avatar";
 import AlertFeed from "../Home/AlertFeed.js";
 
 import { userContext } from "../../context/userContext.js";
+import { feedContext } from "../../context/feedContext.js";
 import { logout } from "../../api/user.js";
 
 const Header = () => {
@@ -14,6 +15,7 @@ const Header = () => {
   const history = useHistory();
   const userstate = useContext(userContext);
   const userdispatch = userstate.userdispatch;
+  const feeddispatch = useContext(feedContext).feeddispatch;
 
   const slideRef = useRef(false);
   const logoRef = useRef(false);
@@ -23,10 +25,12 @@ const Header = () => {
 
   const doLogout = () => {
     loadRef.current.classList.toggle("active");
-    setTimeout(
-      () => logout(userstate.userstate.token, userdispatch, history),
-      1000
-    );
+    setTimeout(() => {
+      logout(userstate.userstate.token, userdispatch, history);
+      feeddispatch({
+        type: "RESET_FEEDS",
+      });
+    }, 1000);
   };
 
   const slide = () => {

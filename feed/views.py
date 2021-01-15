@@ -40,9 +40,19 @@ class FeedView(APIView, FeedPagination):
         user = request.user
         body = request.data['body']
         img_list = request.FILES.getlist('image')
+        tag_list = request.POST.getlist('tag')
 
         feed = Feed(user=user, body=body)
         feed.save()
+
+        for tag_item in tag_list:
+            tag = Tag.objects.filter(tag=tag_item)
+            if(len(tag) == 0):
+                tag = Tag(tag=tag_item)
+                tag.save()
+                feed.tag.add(tag)
+            else:
+                feed.tag.add(tag[0])
 
         for img in img_list:
             image = FeedImage(feed=feed, image=img)

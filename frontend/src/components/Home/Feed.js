@@ -1,9 +1,16 @@
 // 작성자(닉네임, 아이디), 작성자 아바타, 작성일시, 내용, 사진(여러장 가능), 댓글, 좋아요
-import React, { useRef, useContext, useState, useEffect } from "react";
+import React, {
+  useRef,
+  useContext,
+  useState,
+  useEffect,
+  Fragment,
+} from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
+import Chip from "@material-ui/core/Chip";
 import "./feed.css";
 
 import { feedContext } from "../../context/feedContext.js";
@@ -59,7 +66,6 @@ const Feed = (data) => {
     }
   };
 
-  // console.log(data);
   return (
     <>
       <div className="feed-container">
@@ -89,7 +95,9 @@ const Feed = (data) => {
             </ul>
           </div>
         </div>
-        <p>{data.data.body}</p>
+        <p style={{ whiteSpace: "pre-line" }}>
+          {data.data.body.replace(/<br \/>/g, "\n")}
+        </p>
         <div className="overflow-hidden">
           <div className="image-container" ref={imgContainerRef}>
             {data.data.image.map((img) => {
@@ -110,6 +118,23 @@ const Feed = (data) => {
               </div>
             </>
           ) : null}
+          <div style={{ marginTop: "0.5rem" }}>
+            {data.data.tags.map((tag) => {
+              return (
+                <Fragment key={tag.tag}>
+                  <Chip
+                    style={{ height: "1.5rem" }}
+                    avatar={
+                      <Avatar style={{ width: "1rem", height: "1rem" }}>
+                        #
+                      </Avatar>
+                    }
+                    label={tag.tag}
+                  />{" "}
+                </Fragment>
+              );
+            })}
+          </div>
         </div>
         <div className="bottom-container">
           <div className="comment-container">

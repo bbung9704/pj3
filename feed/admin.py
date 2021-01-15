@@ -27,3 +27,11 @@ class AlertFeedAdmin(admin.ModelAdmin):
         return obj.sender.username
     
 admin.site.register(AlertFeed, AlertFeedAdmin)
+
+class TagAdmin(admin.ModelAdmin):
+    model = Tag
+    list_display = ('tag',)
+    
+admin.site.register(Tag, TagAdmin)
+
+
